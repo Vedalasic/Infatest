@@ -155,7 +155,7 @@ def _evaluate_text_answer_with_deepseek(
     material: TheoryMaterial, question: Question, user_answer: str
 ) -> tuple[bool, str] | None:
     api_key = (os.getenv("DEEPSEEK_API_KEY") or "").strip()
-    logger.info("DeepSeek key fingerprint: %s", _mask_api_key(api_key))
+    logger.warning("DeepSeek key fingerprint: %s", _mask_api_key(api_key))
     if not api_key:
         return None
 
