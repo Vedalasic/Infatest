@@ -1,7 +1,7 @@
 {
   "$schema": "https://railway.com/railway.schema.json",
   "deploy": {
-    "startCommand": "gunicorn \"web_app.app:create_app()\"",
+    "startCommand": "gunicorn web_app.app:create_app\\(\\) --bind 0.0.0.0:$PORT",
     "restartPolicyType": "on_failure",
     "restartPolicyMaxRetries": 10
   }
