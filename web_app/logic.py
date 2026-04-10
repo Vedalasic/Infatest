@@ -36,6 +36,15 @@ def _now_str() -> str:
     return datetime.now().strftime("%Y-%m-%d %H:%M:%S")
 
 
+def _mask_api_key(value: str) -> str:
+    if not value:
+        return "<empty>"
+    trimmed = value.strip()
+    if len(trimmed) <= 10:
+        return "*" * len(trimmed)
+    return f"{trimmed[:8]}...{trimmed[-6:]}"
+
+
 def _parse_dt(value: str) -> datetime | None:
     s = (value or "").strip()
     if not s:
@@ -146,6 +155,7 @@ def _evaluate_text_answer_with_deepseek(
     material: TheoryMaterial, question: Question, user_answer: str
 ) -> tuple[bool, str] | None:
     api_key = (os.getenv("DEEPSEEK_API_KEY") or "").strip()
+    logger.info("DeepSeek key fingerprint: %s", _mask_api_key(api_key))
     if not api_key:
         return None
 
