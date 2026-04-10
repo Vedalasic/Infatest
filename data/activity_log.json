@@ -80,6 +80,13 @@
       "event_type": "login",
       "created_at": "2026-04-10 15:36:52",
       "meta": {}
+    },
+    {
+      "event_id": "66d09f8b2496f9c10fd587c5e45de714",
+      "username": "anna11",
+      "event_type": "login",
+      "created_at": "2026-04-10 17:33:55",
+      "meta": {}
     }
   ]
 }

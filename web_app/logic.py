@@ -154,7 +154,11 @@ def _extract_json_object(text: str) -> Dict[str, Any] | None:
 def _evaluate_text_answer_with_deepseek(
     material: TheoryMaterial, question: Question, user_answer: str
 ) -> tuple[bool, str] | None:
-    api_key = (os.getenv("DEEPSEEK_API_KEY") or "").strip()
+    key_from_local = (os.getenv("DEEPSEEK_API_KEY_LOCAL") or "").strip()
+    key_from_default = (os.getenv("DEEPSEEK_API_KEY") or "").strip()
+    api_key = key_from_local or key_from_default
+    key_source = "DEEPSEEK_API_KEY_LOCAL" if key_from_local else "DEEPSEEK_API_KEY"
+    logger.warning("DeepSeek key source: %s", key_source)
     logger.warning("DeepSeek key fingerprint: %s", _mask_api_key(api_key))
     if not api_key:
         return None

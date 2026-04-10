@@ -78,8 +78,8 @@ def _load_env_file(env_path: Path) -> None:
         if not s or s.startswith("#") or "=" not in s:
             continue
         key, value = s.split("=", 1)
-        key = key.strip()
-        if not key or key in os.environ:
+        key = key.strip().lstrip("\ufeff")
+        if not key:
             continue
         value = value.strip()
         if (value.startswith('"') and value.endswith('"')) or (

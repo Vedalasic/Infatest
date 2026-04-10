@@ -22,8 +22,8 @@ def load_dotenv() -> None:
         if not s or s.startswith("#") or "=" not in s:
             continue
         k, v = s.split("=", 1)
-        k, v = k.strip(), v.strip().strip('"').strip("'")
-        if k and k not in os.environ:
+        k, v = k.strip().lstrip("\ufeff"), v.strip().strip('"').strip("'")
+        if k:
             os.environ[k] = v
 
 
