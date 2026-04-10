@@ -1,6 +1,7 @@
 import hashlib
 import html
 import json
+import logging
 import os
 import re
 from urllib import error, request
@@ -27,6 +28,8 @@ from .models import (
     UserRole,
 )
 from . import storage
+
+logger = logging.getLogger(__name__)
 
 
 def _now_str() -> str:
@@ -146,7 +149,7 @@ def _evaluate_text_answer_with_deepseek(
     if not api_key:
         return None
 
-    model = (os.getenv("DEEPSEEK_MODEL") or "openrouter/free").strip()
+    model = (os.getenv("DEEPSEEK_MODEL") or "deepseek/deepseek-chat-v3-0324:free").strip()
     base = (os.getenv("DEEPSEEK_API_URL") or "https://api.deepseek.com").rstrip("/")
     url = f"{base}/chat/completions"
     material_text = _strip_html_tags(getattr(material, "content", "") or "")
@@ -202,16 +205,27 @@ def _evaluate_text_answer_with_deepseek(
         data = json.loads(raw)
         choices = data.get("choices", [])
         if not choices or not isinstance(choices[0], dict):
+            logger.warning("DeepSeek: empty or invalid choices in response")
             return None
         msg = choices[0].get("message") or {}
         text_out = str(msg.get("content", "")).strip()
         obj = _extract_json_object(text_out)
         if not obj:
+            logger.warning("DeepSeek: model response is not JSON object: %s", text_out[:300])
             return None
         is_correct = bool(obj.get("is_correct", False))
         reason = str(obj.get("reason", "")).strip()
         return is_correct, reason
-    except (error.URLError, TimeoutError, json.JSONDecodeError, OSError, ValueError):
+    except error.HTTPError as e:
+        detail = ""
+        try:
+            detail = e.read().decode("utf-8", errors="replace")[:500]
+        except OSError:
+            detail = "<failed to read HTTPError body>"
+        logger.warning("DeepSeek HTTPError %s: %s", e.code, detail)
+        return None
+    except (error.URLError, TimeoutError, json.JSONDecodeError, OSError, ValueError) as e:
+        logger.warning("DeepSeek request failed: %s", e)
         return None
 
 
