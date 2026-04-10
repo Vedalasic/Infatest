@@ -1,0 +1,44 @@
+{% extends "base.html" %}
+{% block title %}{{ material.title }} — Инфотест{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-start flex-wrap gap-2 mb-3">
+  <div>
+    <h2 class="mb-1">{{ material.title }}</h2>
+    <div class="text-muted small">
+      Автор: {{ material.author|default('—') }}
+      {% if material.is_closed %}
+        · <span class="badge text-bg-secondary">закрытая тема</span>
+      {% endif %}
+    </div>
+  </div>
+  <div class="d-flex flex-wrap gap-2">
+    {% if is_owner %}
+      <a class="btn btn-outline-primary btn-sm" href="{{ url_for('material_edit', material_id=material_id) }}">Редактировать</a>
+    {% endif %}
+    {% if material.tests %}
+      <a class="btn btn-success btn-sm" href="{{ url_for('test', material_id=material_id) }}">Пройти тест</a>
+    {% endif %}
+    <a class="btn btn-secondary btn-sm" href="{{ url_for('tests_catalog') }}">К списку тем</a>
+  </div>
+</div>
+
+<div class="card mb-3">
+  <div class="card-body theory-content">
+    {{ material.content|safe }}
+  </div>
+</div>
+
+{% if material.images %}
+  <div class="mb-3">
+    {% for img in material.images %}
+      <img src="{{ url_for('static', filename='theory_materials/' ~ img) }}" class="img-fluid rounded mb-2 d-block" alt="">
+    {% endfor %}
+  </div>
+{% endif %}
+
+{% if material.video_url %}
+  <div class="ratio ratio-16x9 mb-3">
+    <iframe src="{{ material.video_url }}" title="Видео" allowfullscreen></iframe>
+  </div>
+{% endif %}
+{% endblock %}

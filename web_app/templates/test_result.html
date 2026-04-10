@@ -1,0 +1,78 @@
+{% extends "base.html" %}
+{% block title %}Результаты теста{% endblock %}
+{% block content %}
+<div class="card">
+  <div class="card-body">
+    <div class="d-flex flex-wrap justify-content-between align-items-start gap-2 mb-3">
+      <h3 class="card-title mb-0">Результаты теста</h3>
+      {% include 'partials/result_chat_modal.html' %}
+    </div>
+    <p><strong>Правильных ответов:</strong> {{ result.correct_answers }} из {{ result.total_questions }}</p>
+    <p><strong>Процент правильных ответов:</strong> {{ "%.1f"|format(result.percentage) }}%</p>
+    <p><strong>Общее время:</strong> {{ "%.1f"|format(result.total_duration_sec or 0) }} сек.</p>
+
+    <hr>
+    <h5 class="mb-3">Разбор ответов</h5>
+    {% if result.details and result.details|length > 0 %}
+      <div class="accordion" id="answersAccordion">
+        {% for d in result.details %}
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="h{{ loop.index }}">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#c{{ loop.index }}">
+                Вопрос {{ (d.question_index if d.question_index is defined else loop.index0) + 1 }}: {{ d.question_text }}
+                {% if d.is_correct %}
+                  <span class="badge text-bg-success ms-2">верно</span>
+                {% else %}
+                  <span class="badge text-bg-danger ms-2">неверно</span>
+                {% endif %}
+              </button>
+            </h2>
+            <div id="c{{ loop.index }}" class="accordion-collapse collapse" data-bs-parent="#answersAccordion">
+              <div class="accordion-body">
+                <div class="mb-2">
+                  <div class="fw-semibold">Ваш ответ</div>
+                  {% if d.user_answer is sequence and d.user_answer is not string %}
+                    <div>{{ d.user_answer|join(', ') if d.user_answer|length > 0 else '—' }}</div>
+                  {% else %}
+                    <div>{{ d.user_answer or '—' }}</div>
+                  {% endif %}
+                </div>
+                {% set can_see_explanations = (session.get('role') == 'teacher') or show_correct_answers %}
+                {% if show_correct_answers %}
+                  <div class="mb-2">
+                    <div class="fw-semibold">Правильный ответ</div>
+                    <div>{{ d.correct_answers|join(', ') }}</div>
+                  </div>
+                  {% if d.explanation %}
+                    <div>
+                      <div class="fw-semibold">Пояснение</div>
+                      <div class="text-muted">{{ d.explanation }}</div>
+                    </div>
+                  {% endif %}
+                {% endif %}
+                {% if d.duration_sec is defined %}
+                  <div class="mb-2">
+                    <div class="fw-semibold">Время на вопрос</div>
+                    <div>{{ "%.1f"|format(d.duration_sec|float) }} сек.</div>
+                  </div>
+                {% endif %}
+                {% if can_see_explanations and d.ai_reason %}
+                  <div>
+                    <div class="fw-semibold">Пояснение от ИИ</div>
+                    <div class="text-muted">{{ d.ai_reason }}</div>
+                  </div>
+                {% endif %}
+              </div>
+            </div>
+          </div>
+        {% endfor %}
+      </div>
+    {% else %}
+      <div class="text-muted">Нет подробностей для разбора.</div>
+    {% endif %}
+
+    <a class="btn btn-primary mt-3" href="{{ url_for('tests_catalog') }}">К списку тестов</a>
+  </div>
+</div>
+{% endblock %}
+

@@ -1,0 +1,689 @@
+/* =============================================================================
+   Инфотест — EdTech / SaaS UI (только CSS). Палитра: Notion × Stripe × Coursera
+   ============================================================================= */
+
+@import url("https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap");
+
+:root {
+  --ed-primary: #4f46e5;
+  --ed-primary-rgb: 79, 70, 229;
+  --ed-primary-hover: #4338ca;
+  --ed-secondary: #6366f1;
+  --ed-bg: #f9fafb;
+  --ed-surface: #ffffff;
+  --ed-text: #111827;
+  --ed-text-muted: #6b7280;
+  --ed-border: #e5e7eb;
+  --ed-success: #059669;
+  --ed-success-soft: #d1fae5;
+  --ed-danger: #dc2626;
+  --ed-danger-soft: #fee2e2;
+
+  --bs-primary: #4f46e5;
+  --bs-primary-rgb: 79, 70, 229;
+  --bs-link-color: #4f46e5;
+  --bs-link-hover-color: #4338ca;
+
+  --bs-body-bg: #f9fafb;
+  --bs-body-color: #111827;
+  --bs-secondary-color: #6b7280;
+  --bs-emphasis-color: #111827;
+  --bs-border-color: #e5e7eb;
+  --bs-border-color-translucent: rgba(17, 24, 39, 0.06);
+
+  --bs-border-radius: 10px;
+  --bs-border-radius-sm: 8px;
+  --bs-border-radius-lg: 12px;
+  --bs-border-radius-xl: 14px;
+
+  --bs-body-font-family: "Inter", system-ui, -apple-system, "Segoe UI", Roboto, "Helvetica Neue", Arial,
+    sans-serif;
+  --bs-body-font-size: 1rem;
+  --bs-body-line-height: 1.6;
+
+  --bs-card-bg: #ffffff;
+  --bs-card-border-color: var(--ed-border);
+  --bs-card-border-radius: 12px;
+  --bs-card-cap-bg: rgba(17, 24, 39, 0.02);
+
+  --space-1: 8px;
+  --space-2: 12px;
+  --space-3: 16px;
+  --space-4: 24px;
+  --space-5: 32px;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  text-rendering: optimizeLegibility;
+  font-size: 1rem;
+  line-height: 1.65;
+  color: var(--ed-text);
+}
+
+@media (min-width: 768px) {
+  body {
+    font-size: 1.0625rem;
+  }
+}
+
+main.container {
+  padding-bottom: var(--space-5);
+  max-width: 1080px;
+}
+
+/* ---- Типографика ---- */
+main h1,
+main h2 {
+  font-weight: 700;
+  letter-spacing: -0.035em;
+  color: var(--ed-text);
+  line-height: 1.2;
+  margin-bottom: var(--space-4);
+  font-size: clamp(1.5rem, 2.5vw, 1.875rem);
+}
+
+main h3,
+main h4 {
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  color: var(--ed-text);
+  line-height: 1.3;
+}
+
+main h5,
+main h6 {
+  font-weight: 600;
+  letter-spacing: -0.02em;
+  color: var(--ed-text);
+  line-height: 1.35;
+}
+
+main .text-muted,
+main .small.text-muted {
+  color: var(--ed-text-muted) !important;
+}
+
+main p {
+  margin-bottom: var(--space-3);
+}
+
+/* ---- Навбар: цвет как у primary-кнопок ---- */
+.navbar {
+  margin-bottom: var(--space-5) !important;
+  padding-top: var(--space-3) !important;
+  padding-bottom: var(--space-3) !important;
+  background: var(--ed-primary) !important;
+  border-bottom: 1px solid rgba(255, 255, 255, 0.18);
+  box-shadow: 0 4px 12px rgba(var(--ed-primary-rgb), 0.35);
+}
+
+.navbar.bg-primary {
+  background-color: var(--ed-primary) !important;
+}
+
+.navbar.navbar-dark {
+  --bs-navbar-color: rgba(255, 255, 255, 0.88);
+  --bs-navbar-hover-color: #ffffff;
+  --bs-navbar-active-color: #ffffff;
+  --bs-navbar-brand-color: #ffffff;
+  --bs-navbar-brand-hover-color: #ffffff;
+}
+
+.navbar-brand.text-white {
+  color: #ffffff !important;
+  font-weight: 700;
+  font-size: 1.125rem;
+  letter-spacing: -0.03em;
+  transition: color 0.2s ease, opacity 0.2s ease;
+}
+
+.navbar-brand:hover {
+  opacity: 0.92;
+  color: #ffffff !important;
+}
+
+.navbar-text {
+  color: rgba(255, 255, 255, 0.88) !important;
+  font-size: 0.9375rem;
+  font-weight: 500;
+}
+
+.navbar .btn-outline-light {
+  color: #ffffff !important;
+  background: rgba(255, 255, 255, 0.08);
+  border: 1px solid rgba(255, 255, 255, 0.36) !important;
+  font-weight: 500;
+}
+
+.navbar .btn-outline-light:hover {
+  background: rgba(255, 255, 255, 0.18) !important;
+  border-color: rgba(255, 255, 255, 0.65) !important;
+  color: #ffffff !important;
+}
+
+.navbar .btn-light {
+  background: #ffffff !important;
+  color: var(--ed-primary) !important;
+  border: 1px solid rgba(255, 255, 255, 0.25) !important;
+  font-weight: 600;
+}
+
+.navbar .btn-light:hover {
+  background: #f8fafc !important;
+  color: var(--ed-primary-hover) !important;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.14);
+}
+
+.navbar .btn {
+  border-radius: 10px;
+  padding: 0.5rem 1rem;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+.navbar .btn-light:hover {
+  transform: translateY(-1px);
+}
+
+.navbar-dark .navbar-toggler {
+  border-color: rgba(255, 255, 255, 0.45);
+  color: #ffffff;
+}
+
+.navbar-dark .navbar-toggler-icon {
+  --bs-navbar-toggler-icon-bg: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 30 30'%3e%3cpath stroke='rgba%28255,255,255,0.95%29' stroke-linecap='round' stroke-miterlimit='10' stroke-width='2' d='M4 7h22M4 15h22M4 23h22'/%3e%3c/svg%3e");
+  background-image: var(--bs-navbar-toggler-icon-bg);
+}
+
+/* ---- Карточки ---- */
+.card {
+  background: var(--ed-surface);
+  border: 1px solid var(--ed-border);
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+  margin-bottom: var(--space-4);
+}
+
+.card:hover {
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.07);
+  border-color: #e5e7eb;
+}
+
+.card-body {
+  padding: var(--space-4);
+}
+
+.card-title {
+  font-weight: 600;
+  font-size: 1.05rem;
+  letter-spacing: -0.02em;
+  color: var(--ed-text);
+  margin-bottom: var(--space-3);
+}
+
+.card-text {
+  color: var(--ed-text);
+  line-height: 1.65;
+  margin-bottom: var(--space-3);
+}
+
+/* ---- Кнопки ---- */
+.btn {
+  border-radius: 10px;
+  font-weight: 500;
+  padding: 0.55rem 1.15rem;
+  transition: background-color 0.2s ease, border-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease,
+    transform 0.2s ease;
+}
+
+.btn-sm {
+  border-radius: 8px;
+  padding: 0.4rem 0.9rem;
+}
+
+.btn-primary {
+  background: var(--ed-primary);
+  border: none;
+  color: #fff;
+  box-shadow: 0 2px 6px rgba(var(--ed-primary-rgb), 0.25);
+}
+
+.btn-primary:hover {
+  background: var(--ed-primary-hover);
+  color: #fff;
+  transform: scale(1.02);
+  box-shadow: 0 4px 14px rgba(var(--ed-primary-rgb), 0.35);
+}
+
+.btn-primary:active {
+  transform: scale(0.98);
+}
+
+.btn-success {
+  background: var(--ed-success);
+  border: none;
+  color: #fff;
+}
+
+.btn-success:hover {
+  background: #047857;
+  color: #fff;
+  transform: scale(1.02);
+  box-shadow: 0 4px 14px rgba(5, 150, 105, 0.35);
+}
+
+.btn-secondary {
+  background: #f3f4f6;
+  border: 1px solid var(--ed-border);
+  color: var(--ed-text);
+}
+
+.btn-secondary:hover {
+  background: #e5e7eb;
+  border-color: #d1d5db;
+  color: var(--ed-text);
+}
+
+.btn-outline-primary {
+  border: 1.5px solid var(--ed-primary);
+  color: var(--ed-primary);
+  background: #fff;
+}
+
+.btn-outline-primary:hover {
+  background: rgba(var(--ed-primary-rgb), 0.08);
+  color: var(--ed-primary-hover);
+  border-color: var(--ed-primary-hover);
+  transform: scale(1.02);
+}
+
+.btn-outline-secondary {
+  border: 1px solid var(--ed-border);
+  color: var(--ed-text-muted);
+  background: #fff;
+}
+
+.btn-outline-secondary:hover {
+  background: #f9fafb;
+  border-color: #d1d5db;
+  color: var(--ed-text);
+}
+
+.btn:focus-visible {
+  box-shadow: 0 0 0 3px rgba(var(--ed-primary-rgb), 0.25);
+}
+
+/* ---- Формы ---- */
+.form-control,
+.form-select {
+  border-radius: 8px;
+  border: 1px solid var(--ed-border);
+  padding: 0.65rem 1rem;
+  font-size: 1rem;
+  line-height: 1.5;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.form-control:focus,
+.form-select:focus {
+  border-color: var(--ed-primary);
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.1);
+}
+
+.form-label {
+  font-weight: 500;
+  color: var(--ed-text);
+  margin-bottom: var(--space-2);
+  font-size: 0.9375rem;
+}
+
+/* ---- Страница теста: варианты как карточки ---- */
+form[method="post"] .card .form-check {
+  display: flex;
+  align-items: flex-start;
+  gap: var(--space-2);
+  padding: var(--space-3) var(--space-4);
+  margin-bottom: var(--space-2);
+  border: 1px solid var(--ed-border);
+  border-radius: 10px;
+  background: #fafafa;
+  cursor: pointer;
+  transition: background-color 0.2s ease, border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+form[method="post"] .card .form-check:hover {
+  background: #f5f3ff;
+  border-color: #c7d2fe;
+  box-shadow: 0 2px 8px rgba(var(--ed-primary-rgb), 0.08);
+}
+
+form[method="post"] .card .form-check:has(.form-check-input:checked) {
+  background: rgba(var(--ed-primary-rgb), 0.09);
+  border-color: var(--ed-primary);
+  box-shadow: 0 0 0 1px rgba(var(--ed-primary-rgb), 0.2);
+}
+
+form[method="post"] .card .form-check-label {
+  cursor: pointer;
+  flex: 1;
+  padding-top: 2px;
+  line-height: 1.55;
+  color: var(--ed-text);
+}
+
+form[method="post"] .card .form-check-input {
+  width: 1.15em;
+  height: 1.15em;
+  float: none;
+  margin-left: 0;
+  margin-top: 0.35em;
+  border-color: #d1d5db;
+  cursor: pointer;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
+}
+
+form[method="post"] .card .form-check-input:focus {
+  border-color: var(--ed-primary);
+  box-shadow: 0 0 0 3px rgba(79, 70, 229, 0.15);
+}
+
+form[method="post"] .card .form-check-input:checked {
+  background-color: var(--ed-primary);
+  border-color: var(--ed-primary);
+}
+
+form[method="post"] .card textarea.form-control {
+  margin-top: var(--space-2);
+}
+
+/* Больше «воздуха» между вопросами в тесте */
+form[method="post"] > .card {
+  margin-bottom: var(--space-4);
+}
+
+form[method="post"] > .d-flex.gap-2 {
+  margin-top: var(--space-5);
+  gap: var(--space-3) !important;
+}
+
+/* ---- Результаты теста: акцент на итогах (разметка: d-flex + два <p> в test_result) ---- */
+main .card-body > div.d-flex + p,
+main .card-body > div.d-flex + p + p {
+  padding: var(--space-3) var(--space-4);
+  margin-bottom: var(--space-3);
+  background: #f9fafb;
+  border-radius: 10px;
+  border-left: 4px solid var(--ed-primary);
+  font-size: 1.05rem;
+}
+
+main .card-body > div.d-flex + p + p {
+  border-left-color: var(--ed-secondary);
+  font-weight: 500;
+  font-size: 1.15rem;
+}
+
+main .card-body > div.d-flex + p + p strong {
+  color: var(--ed-text);
+}
+
+/* ---- Бейджи верно / неверно ---- */
+.badge.text-bg-success {
+  background: var(--ed-success-soft) !important;
+  color: #065f46 !important;
+  font-weight: 600;
+  padding: 0.35em 0.65em;
+  border-radius: 8px;
+}
+
+.badge.text-bg-danger {
+  background: var(--ed-danger-soft) !important;
+  color: #991b1b !important;
+  font-weight: 600;
+  padding: 0.35em 0.65em;
+  border-radius: 8px;
+}
+
+/* ---- Таблицы ---- */
+.table {
+  --bs-table-border-color: var(--ed-border);
+  --bs-table-hover-bg: rgba(79, 70, 229, 0.04);
+}
+
+.table thead th {
+  font-weight: 600;
+  font-size: 0.75rem;
+  text-transform: uppercase;
+  letter-spacing: 0.06em;
+  color: var(--ed-text-muted);
+  padding: var(--space-3) var(--space-3);
+  border-bottom: 1px solid var(--ed-border);
+}
+
+.table td {
+  padding: var(--space-3);
+  vertical-align: middle;
+}
+
+.table-striped > tbody > tr:nth-of-type(odd) > * {
+  --bs-table-accent-bg: rgba(17, 24, 39, 0.02);
+}
+
+/* ---- Алерты ---- */
+.alert {
+  border: none;
+  border-radius: 12px;
+  padding: var(--space-3) var(--space-4);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.alert-dismissible .btn-close {
+  padding: var(--space-3);
+}
+
+/* ---- Модалки ---- */
+.modal-content {
+  border: 1px solid var(--ed-border);
+  border-radius: 14px;
+  box-shadow: 0 24px 48px rgba(0, 0, 0, 0.12);
+}
+
+.modal-header,
+.modal-footer {
+  border-color: var(--ed-border);
+  padding: var(--space-4);
+}
+
+/* ---- Аккордеон (разбор ответов) ---- */
+.accordion-item {
+  border: 1px solid var(--ed-border);
+  border-radius: 10px !important;
+  margin-bottom: var(--space-2);
+  overflow: hidden;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.04);
+}
+
+.accordion-button {
+  font-weight: 500;
+  padding: var(--space-3) var(--space-4);
+  transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+}
+
+.accordion-button:not(.collapsed) {
+  background: rgba(var(--ed-primary-rgb), 0.06);
+  color: var(--ed-text);
+  box-shadow: none;
+}
+
+.accordion-button:focus {
+  box-shadow: inset 0 0 0 1px rgba(var(--ed-primary-rgb), 0.25);
+}
+
+.accordion-body {
+  padding: var(--space-4);
+  line-height: 1.65;
+}
+
+/* ---- Списки ---- */
+.list-group-item {
+  border-color: var(--ed-border);
+  padding: var(--space-3) var(--space-4);
+  transition: background-color 0.2s ease;
+}
+
+/* ---- Бейджи общие ---- */
+.badge {
+  font-weight: 600;
+  border-radius: 8px;
+}
+
+/* ---- Прогресс ---- */
+.progress {
+  border-radius: 8px;
+  height: 0.65rem;
+  background: #e5e7eb;
+}
+
+.progress-bar {
+  transition: width 0.35s ease;
+}
+
+/* ---- Ссылки в контенте ---- */
+main a:not(.btn):not(.nav-link):not(.navbar-brand):not(.page-link):not(.list-group-item) {
+  color: var(--ed-primary);
+  font-weight: 500;
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+main a:not(.btn):not(.nav-link):not(.navbar-brand):not(.page-link):not(.list-group-item):hover {
+  color: var(--ed-primary-hover);
+  text-decoration: underline;
+  text-underline-offset: 3px;
+}
+
+/* ---- Прочее ---- */
+.password-strength ul {
+  padding-left: 1.4rem;
+}
+
+.page-link {
+  border-radius: 8px;
+  border-color: var(--ed-border);
+  color: var(--ed-primary);
+  transition: all 0.2s ease;
+}
+
+hr {
+  border-color: var(--ed-border);
+  opacity: 1;
+}
+
+/* ---- Quill ---- */
+.material-editor .ql-toolbar.ql-snow {
+  background: #3d3d3d;
+  border-color: #555;
+  border-radius: 10px 10px 0 0;
+  padding: var(--space-2);
+}
+.material-editor .ql-container.ql-snow {
+  border-color: #555;
+  border-radius: 0 0 10px 10px;
+  min-height: 260px;
+  font-size: 1rem;
+  background: #fff;
+}
+.material-editor .ql-toolbar.ql-snow .ql-stroke {
+  stroke: #e8e8e8;
+}
+.material-editor .ql-toolbar.ql-snow .ql-fill {
+  fill: #e8e8e8;
+}
+.material-editor .ql-toolbar.ql-snow .ql-picker-label {
+  color: #e8e8e8;
+}
+.material-editor .ql-toolbar.ql-snow .ql-picker-options {
+  background: #3d3d3d;
+  border-color: #555;
+}
+.material-editor .ql-toolbar.ql-snow .ql-picker-item {
+  color: #e8e8e8;
+}
+.material-editor .ql-toolbar.ql-snow button:hover .ql-stroke,
+.material-editor .ql-toolbar.ql-snow button.ql-active .ql-stroke {
+  stroke: #a5b4fc;
+}
+.material-editor .ql-toolbar.ql-snow button:hover .ql-fill,
+.material-editor .ql-toolbar.ql-snow button.ql-active .ql-fill {
+  fill: #a5b4fc;
+}
+.material-editor .ql-snow .ql-tooltip {
+  background: #3d3d3d;
+  border-color: #555;
+  color: #e8e8e8;
+}
+.material-editor .ql-container {
+  position: relative;
+}
+.material-editor .ql-editor img,
+.theory-content img {
+  max-width: 100%;
+  height: auto;
+  vertical-align: middle;
+}
+.material-editor .ql-editor img {
+  cursor: pointer;
+}
+
+/* ---- Достижения ---- */
+.achievement-item--locked {
+  border: 1px solid var(--ed-border) !important;
+  background: #f9fafb;
+  color: var(--ed-text-muted);
+  filter: grayscale(0.2);
+  border-radius: 12px;
+  transition: filter 0.2s ease, border-color 0.2s ease;
+}
+.achievement-item--locked .fw-semibold {
+  color: #4b5563;
+}
+.achievement-item--unlocked {
+  filter: none;
+  border-radius: 12px;
+  transition: box-shadow 0.2s ease, border-color 0.2s ease;
+}
+.achievement-item--unlocked.achievement-item--primary {
+  border-color: var(--ed-primary) !important;
+  background: rgba(var(--ed-primary-rgb), 0.06);
+}
+.achievement-item--unlocked.achievement-item--info {
+  border-color: #6366f1 !important;
+  background: rgba(99, 102, 241, 0.08);
+}
+.achievement-item--unlocked.achievement-item--success {
+  border-color: var(--ed-success) !important;
+  background: rgba(5, 150, 105, 0.08);
+}
+.achievement-item--unlocked.achievement-item--warning {
+  border-color: #d97706 !important;
+  background: rgba(217, 119, 6, 0.1);
+}
+.achievement-item--unlocked.achievement-item--danger {
+  border-color: var(--ed-danger) !important;
+  background: rgba(220, 38, 38, 0.06);
+}
+
+.result-chat-text {
+  line-height: 1.65;
+}
+
+.alert.fade {
+  transition: opacity 0.2s ease;
+}

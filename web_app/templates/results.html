@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block title %}Результаты тестов{% endblock %}
+{% block content %}
+<h2 class="mb-3">Результаты тестов</h2>
+
+<form class="row g-2 mb-3" method="get">
+  <div class="col-sm-8 col-md-6 col-lg-4">
+    <input type="text" class="form-control" name="search" placeholder="Поиск по имени или материалу"
+           value="{{ search }}">
+  </div>
+  <div class="col-auto">
+    <button type="submit" class="btn btn-outline-secondary">Искать</button>
+  </div>
+</form>
+
+<div class="table-responsive">
+  <table class="table table-striped table-hover align-middle">
+    <thead>
+      <tr>
+        {% if is_teacher %}
+          <th>Участник</th>
+        {% endif %}
+        <th>Дата</th>
+        <th>Материал</th>
+        <th>Правильных ответов</th>
+        <th>Всего вопросов</th>
+        <th>Процент</th>
+        <th class="text-nowrap">Чат</th>
+        <th class="text-end">Просмотр</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for r in results %}
+        <tr>
+          {% if is_teacher %}
+            <td>{{ r.student_username }}</td>
+          {% endif %}
+          <td>{{ r.date }}</td>
+          <td>{{ r.material_title }}</td>
+          <td>{{ r.correct_answers }}</td>
+          <td>{{ r.total_questions }}</td>
+          <td>{{ "%.1f"|format(r.percentage) }}%</td>
+          <td class="text-nowrap">
+            <a class="btn btn-sm btn-outline-primary" href="{{ url_for('result_view', result_id=r.result_id) }}#result-chat">Диалог</a>
+          </td>
+          <td class="text-end">
+            <a class="btn btn-sm btn-outline-secondary" href="{{ url_for('result_view', result_id=r.result_id) }}">Открыть</a>
+          </td>
+        </tr>
+      {% else %}
+        <tr>
+          <td colspan="{{ 7 + (1 if is_teacher else 0) }}" class="text-center text-muted">
+            Результатов пока нет.
+          </td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
+

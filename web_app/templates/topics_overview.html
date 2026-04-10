@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+{% block title %}Открытые темы и тесты{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h2 class="mb-0">Все открытые темы и тесты</h2>
+  {% if pick_for_class %}
+    <a class="btn btn-outline-secondary" href="{{ url_for('class_assignment_new', class_id=pick_for_class) }}">Назад к заданию</a>
+  {% else %}
+    <a class="btn btn-outline-secondary" href="{{ url_for('tests_catalog') }}">К каталогу тестов</a>
+  {% endif %}
+</div>
+
+<form class="row g-2 mb-3" method="get">
+  {% if pick_for_class %}
+    <input type="hidden" name="pick_for_class" value="{{ pick_for_class }}">
+  {% endif %}
+  <div class="col-sm-8 col-md-6 col-lg-4">
+    <input type="text" class="form-control" name="q" placeholder="Поиск по теме" value="{{ q }}">
+  </div>
+  <div class="col-auto">
+    <button type="submit" class="btn btn-outline-secondary">Искать</button>
+  </div>
+</form>
+
+<div class="list-group">
+  {% for m in materials %}
+    <div class="list-group-item d-flex justify-content-between align-items-center">
+      <div>
+        <div class="fw-semibold">{{ m.title }}</div>
+        <div class="small text-muted">Вопросов: {{ m.tests|length }}</div>
+      </div>
+      <div class="d-flex gap-2">
+        <a class="btn btn-sm btn-outline-secondary" href="{{ url_for('material_view', material_id=m.material_id) }}">
+          Перейти к теме
+        </a>
+        {% if m.tests and m.tests|length > 0 %}
+          <a class="btn btn-sm btn-outline-primary"
+             href="{{ url_for('test_preview', material_id=m.material_id, pick_for_class=pick_for_class, q=q) }}">
+            Просмотреть тест
+          </a>
+          {% if pick_for_class %}
+            <a class="btn btn-sm btn-success"
+               href="{{ url_for('class_assignment_new', class_id=pick_for_class, material_id=m.material_id) }}">
+              Выбрать для задания
+            </a>
+          {% endif %}
+        {% else %}
+          <button class="btn btn-sm btn-secondary" disabled>Тест отсутствует</button>
+        {% endif %}
+      </div>
+    </div>
+  {% else %}
+    <div class="alert alert-info">Открытые темы не найдены.</div>
+  {% endfor %}
+</div>
+{% endblock %}
+

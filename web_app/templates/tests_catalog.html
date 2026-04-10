@@ -1,0 +1,75 @@
+{% extends "base.html" %}
+{% block title %}Тесты — Инфотест{% endblock %}
+{% block content %}
+{% if not session.get('username') %}
+<div class="alert alert-info">Войдите в систему, чтобы проходить тесты и работать с материалами.</div>
+{% endif %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h2 class="mb-0">Все тесты</h2>
+  {% if session.get('role') == 'student' %}
+    <a class="btn btn-outline-primary" href="{{ url_for('my_assignments') }}">Мои задания</a>
+  {% endif %}
+</div>
+
+<form class="row g-2 mb-3" method="get">
+  <div class="col-sm-8 col-md-6 col-lg-4">
+    <input type="text" class="form-control" name="q" placeholder="Поиск по названию темы" value="{{ q }}">
+  </div>
+  <div class="col-auto">
+    <button type="submit" class="btn btn-outline-secondary">Искать</button>
+  </div>
+</form>
+
+<div class="list-group">
+  {% for m in materials %}
+    <div class="list-group-item d-flex justify-content-between align-items-center">
+      <div>
+        <div class="fw-semibold">{{ m.title }}</div>
+        <div class="small text-muted">
+          Вопросов: {{ m.tests|length }}
+          {% if m.is_closed %}
+            · <span class="badge text-bg-secondary">закрытая</span>
+          {% endif %}
+        </div>
+      </div>
+      <div class="d-flex gap-2">
+        {% if not session.get('username') %}
+          <a class="btn btn-sm btn-outline-primary" href="{{ url_for('login') }}">Войти</a>
+        {% elif session.get('role') == 'student' %}
+          {% set info = access_map.get(m.material_id, {}) %}
+          {% if info.get('locked') %}
+            <form method="post" action="{{ url_for('request_access', material_id=m.material_id) }}">
+              <button type="submit" class="btn btn-sm btn-primary">Подать заявку</button>
+            </form>
+            {% if info.get('status') == 'pending' %}
+              <span class="small text-muted align-self-center">Ожидает</span>
+            {% elif info.get('status') == 'rejected' %}
+              <span class="small text-danger align-self-center">Отклонена</span>
+            {% endif %}
+          {% else %}
+            <a class="btn btn-sm btn-outline-secondary" href="{{ url_for('material_view', material_id=m.material_id) }}">Просмотр</a>
+            {% if m.tests %}
+              <a class="btn btn-sm btn-success" href="{{ url_for('test', material_id=m.material_id) }}">Пройти тест</a>
+            {% else %}
+              <button class="btn btn-sm btn-secondary" disabled>Тест отсутствует</button>
+            {% endif %}
+          {% endif %}
+        {% else %}
+          {% if (m.author|default('admin')) == session.get('username') or session.get('username') == 'admin' %}
+            <a class="btn btn-sm btn-outline-primary" href="{{ url_for('material_edit', material_id=m.material_id) }}">Редактировать</a>
+          {% endif %}
+          <a class="btn btn-sm btn-outline-secondary" href="{{ url_for('material_view', material_id=m.material_id) }}">Просмотр</a>
+          {% if m.tests %}
+            <a class="btn btn-sm btn-success" href="{{ url_for('test', material_id=m.material_id) }}">Пройти тест</a>
+          {% else %}
+            <button class="btn btn-sm btn-secondary" disabled>Тест отсутствует</button>
+          {% endif %}
+        {% endif %}
+      </div>
+    </div>
+  {% else %}
+    <div class="text-muted">Тестов пока нет.</div>
+  {% endfor %}
+</div>
+{% endblock %}
+

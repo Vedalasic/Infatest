@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block title %}Заявки на доступ{% endblock %}
+{% block content %}
+<h2 class="mb-3">Заявки на доступ к закрытым темам</h2>
+
+<div class="table-responsive">
+  <table class="table table-striped table-hover align-middle">
+    <thead>
+      <tr>
+        <th>Дата</th>
+        <th>Ученик</th>
+        <th>Тема</th>
+        <th>Статус</th>
+        <th class="text-end">Действия</th>
+      </tr>
+    </thead>
+    <tbody>
+      {% for r in requests %}
+        <tr>
+          <td class="text-nowrap">{{ r.created_at or '—' }}</td>
+          <td>{{ r.student_username }}</td>
+          <td>{{ r.material_title or r.material_id }}</td>
+          <td>
+            {% if r.status.value == 'pending' %}
+              <span class="badge text-bg-warning">Ожидает</span>
+            {% elif r.status.value == 'approved' %}
+              <span class="badge text-bg-success">Подтверждена</span>
+            {% else %}
+              <span class="badge text-bg-danger">Отклонена</span>
+            {% endif %}
+            {% if r.decided_by %}
+              <div class="small text-muted mt-1">Решение: {{ r.decided_by }}{% if r.decided_at %}, {{ r.decided_at }}{% endif %}</div>
+            {% endif %}
+          </td>
+          <td class="text-end">
+            {% if r.status.value == 'pending' %}
+              <form method="post" class="d-inline">
+                <input type="hidden" name="request_id" value="{{ r.request_id }}">
+                <input type="hidden" name="action" value="approve">
+                <button type="submit" class="btn btn-sm btn-success">Подтвердить</button>
+              </form>
+              <form method="post" class="d-inline ms-2">
+                <input type="hidden" name="request_id" value="{{ r.request_id }}">
+                <input type="hidden" name="action" value="reject">
+                <button type="submit" class="btn btn-sm btn-outline-danger">Отклонить</button>
+              </form>
+            {% else %}
+              <span class="text-muted">—</span>
+            {% endif %}
+          </td>
+        </tr>
+      {% else %}
+        <tr>
+          <td colspan="5" class="text-center text-muted">Заявок пока нет.</td>
+        </tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
+

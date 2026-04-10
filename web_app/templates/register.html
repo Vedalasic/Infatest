@@ -1,0 +1,77 @@
+{% extends "base.html" %}
+{% block title %}Регистрация — Инфотест{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-md-8 col-lg-6">
+    <h2 class="mb-4 text-center">Регистрация</h2>
+    <form method="post">
+      <div class="row">
+        <div class="col-md-6 mb-3">
+          <label for="first_name" class="form-label">Имя</label>
+          <input type="text" class="form-control" id="first_name" name="first_name" required>
+        </div>
+        <div class="col-md-6 mb-3">
+          <label for="last_name" class="form-label">Фамилия</label>
+          <input type="text" class="form-control" id="last_name" name="last_name" required>
+        </div>
+      </div>
+
+      <div class="mb-3">
+        <label for="username" class="form-label">Имя пользователя</label>
+        <input type="text" class="form-control" id="username" name="username" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="password" class="form-label">Пароль</label>
+        <input type="password" class="form-control" id="password" name="password" required>
+      </div>
+
+      <div class="mb-3">
+        <label for="confirm_password" class="form-label">Подтверждение пароля</label>
+        <input type="password" class="form-control" id="confirm_password" name="confirm_password" required>
+      </div>
+
+      {% if password_info %}
+        <div class="mb-3">
+          <div class="password-strength bg-light p-2 rounded">
+            <strong>Надежность пароля:</strong>
+            <span class="badge" style="background-color: {{ password_info.color }}; color: #000;">
+              {{ password_info.message }}
+            </span>
+            {% if password_info.details %}
+              <ul class="mt-2 mb-0 small text-muted">
+                {% for line in password_info.details.split('\n') %}
+                  <li>{{ line }}</li>
+                {% endfor %}
+              </ul>
+            {% endif %}
+          </div>
+        </div>
+      {% endif %}
+
+      <div class="mb-3">
+        <label class="form-label">Роль пользователя</label>
+        <div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="role" id="role_student" value="student" checked>
+            <label class="form-check-label" for="role_student">Ученик</label>
+          </div>
+          <div class="form-check form-check-inline">
+            <input class="form-check-input" type="radio" name="role" id="role_teacher" value="teacher">
+            <label class="form-check-label" for="role_teacher">Учитель</label>
+          </div>
+        </div>
+      </div>
+
+      <div class="d-grid gap-2 mb-2">
+        <button type="submit" class="btn btn-primary">Зарегистрироваться</button>
+      </div>
+      <div class="text-center">
+        Уже есть аккаунт?
+        <a href="{{ url_for('login') }}">Войти</a>
+      </div>
+    </form>
+  </div>
+</div>
+{% endblock %}
+

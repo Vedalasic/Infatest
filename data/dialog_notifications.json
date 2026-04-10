@@ -1,0 +1,19 @@
+{
+  "notifications": [
+    {
+      "result_id": "res_anna_cyber_1",
+      "username": "teacher11",
+      "last_read_at": "2026-04-10 15:35:13"
+    },
+    {
+      "result_id": "res_ivan_cyber_1",
+      "username": "teacher11",
+      "last_read_at": "2026-04-10 15:35:25"
+    },
+    {
+      "result_id": "0a2fc441216b7f169dbda7e3ad1e3d8d",
+      "username": "teacher11",
+      "last_read_at": "2026-04-10 15:43:08"
+    }
+  ]
+}

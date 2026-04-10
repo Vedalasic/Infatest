@@ -1,0 +1,51 @@
+{% extends "base.html" %}
+{% block title %}Ответы учеников — {{ assignment.material_title }}{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-start mb-3">
+  <div>
+    <h2 class="mb-1">Ответы учеников по заданию</h2>
+    <div class="text-muted">{{ classroom.name }} · {{ assignment.material_title }}</div>
+  </div>
+  <a class="btn btn-outline-secondary" href="{{ url_for('class_view', class_id=classroom.class_id) }}">Назад в класс</a>
+</div>
+
+<div class="card">
+  <div class="card-body p-0">
+    <div class="table-responsive">
+      <table class="table table-hover align-middle mb-0">
+        <thead>
+          <tr>
+            <th>Ученик</th>
+            <th>Дата попытки</th>
+            <th class="text-center">Правильных</th>
+            <th class="text-center">Балл</th>
+            <th class="text-end">Разбор</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for r in results %}
+            <tr>
+              <td>
+                {{ get_user_display_name(r.student_username) }}
+                <span class="text-muted small">({{ r.student_username }})</span>
+              </td>
+              <td>{{ r.date }}</td>
+              <td class="text-center">{{ r.correct_answers }} / {{ r.total_questions }}</td>
+              <td class="text-center">{{ "%.1f"|format(r.percentage) }}%</td>
+              <td class="text-end">
+                <a class="btn btn-sm btn-primary" href="{{ url_for('result_view', result_id=r.result_id) }}">
+                  Открыть ответы
+                </a>
+              </td>
+            </tr>
+          {% else %}
+            <tr>
+              <td colspan="5" class="text-center text-muted py-4">По этому заданию пока нет попыток.</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}

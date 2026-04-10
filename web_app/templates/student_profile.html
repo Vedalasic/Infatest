@@ -1,0 +1,61 @@
+{% extends "base.html" %}
+{% block title %}Профиль ученика{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-start gap-3 mb-3">
+  <div>
+    <h2 class="mb-1">Профиль ученика</h2>
+    <div class="text-muted small">
+      {{ u.first_name }} {{ u.last_name }} · {{ u.username }} · Последний вход: {{ u.last_seen or '—' }}
+    </div>
+  </div>
+  <div class="d-flex gap-2">
+    <a class="btn btn-outline-secondary" href="{{ url_for('profile_edit') }}">Редактировать</a>
+    <a class="btn btn-outline-secondary" href="{{ url_for('profile_password') }}">Сменить пароль</a>
+    <a class="btn btn-outline-danger" href="{{ url_for('logout') }}">Выйти</a>
+  </div>
+</div>
+
+<div class="card mb-3">
+  <div class="card-body">
+    <h5 class="card-title mb-3">Навигация</h5>
+    <div class="d-flex flex-wrap gap-2">
+      <a class="btn btn-outline-primary" href="{{ url_for('classes_home') }}">Классы</a>
+      <a class="btn btn-primary" href="{{ url_for('tests_catalog') }}">Тесты</a>
+      <a class="btn btn-outline-primary" href="{{ url_for('statistics') }}">Статистика</a>
+      <a class="btn btn-outline-secondary" href="{{ url_for('results') }}">Результаты</a>
+      <a class="btn btn-outline-primary" href="{{ url_for('all_dialogs') }}">Все диалоги</a>
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title mb-3">Последние результаты</h5>
+    <div class="table-responsive">
+      <table class="table table-sm table-striped align-middle mb-0">
+        <thead>
+          <tr>
+            <th>Дата</th>
+            <th>Материал</th>
+            <th class="text-end">Баллы</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for r in stats.last5 %}
+            <tr>
+              <td class="text-nowrap">{{ r.date }}</td>
+              <td>{{ r.material_title }}</td>
+              <td class="text-end">{{ "%.1f"|format(r.percentage) }}%</td>
+            </tr>
+          {% else %}
+            <tr>
+              <td colspan="3" class="text-center text-muted">Результатов пока нет.</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}
+

@@ -1,0 +1,14 @@
+{
+  "memberships": [
+    {
+      "class_id": "class_11i",
+      "student_username": "ivan11",
+      "joined_at": "2026-03-10 09:20:00"
+    },
+    {
+      "class_id": "class_11i",
+      "student_username": "anna11",
+      "joined_at": "2026-03-10 09:22:00"
+    }
+  ]
+}

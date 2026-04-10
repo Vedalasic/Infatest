@@ -1,0 +1,213 @@
+{% extends "base.html" %}
+{% block title %}
+  {% if mode == 'new' %}Новый вопрос{% else %}Редактирование вопроса{% endif %} — Инфотест
+{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-lg-8">
+    <div class="card">
+      <div class="card-body">
+        <h3 class="card-title mb-3">
+          {% if mode == 'new' %}Добавление нового вопроса{% else %}Редактирование вопроса{% endif %}
+        </h3>
+
+        <form method="post" id="question-form">
+          <div class="mb-3">
+            <label for="question_text" class="form-label">Текст вопроса</label>
+            <textarea class="form-control" id="question_text" name="question_text" rows="4" required>{{ question.question_text if question else '' }}</textarea>
+          </div>
+
+          <div class="mb-3">
+            <label for="explanation" class="form-label">Пояснение (показывается после теста)</label>
+            <textarea class="form-control" id="explanation" name="explanation" rows="3">{{ question.explanation if question else '' }}</textarea>
+          </div>
+
+          <div class="mb-3">
+            <label for="question_type" class="form-label">Тип вопроса</label>
+            <select class="form-select" id="question_type" name="question_type">
+              <option value="single_choice"
+                {% if not question or question.question_type.value == 'single_choice' %}selected{% endif %}>
+                Один вариант ответа
+              </option>
+              <option value="multiple_choice"
+                {% if question and question.question_type.value == 'multiple_choice' %}selected{% endif %}>
+                Несколько вариантов ответа
+              </option>
+              <option value="text_answer"
+                {% if question and question.question_type.value == 'text_answer' %}selected{% endif %}>
+                Текстовый ответ
+              </option>
+            </select>
+            <div class="form-text">
+              Для текстового ответа варианты ниже использовать не обязательно.
+            </div>
+          </div>
+
+          <div class="mb-3" id="options-block">
+            <label class="form-label">Варианты ответа и правильные ответы</label>
+
+            <div class="input-group mb-2">
+              <input type="text" class="form-control" id="new-option-text" placeholder="Текст варианта">
+              <button type="button" class="btn btn-outline-secondary" id="add-option-btn">
+                Добавить вариант
+              </button>
+            </div>
+
+            <div id="options-list" class="list-group mb-2">
+              {# Существующие варианты при редактировании #}
+              {% set existing_options = options_text.split('\n') if options_text is defined and options_text else (question.options if question and question.options else []) %}
+              {% set existing_correct = correct_text.split('\n') if correct_text is defined and correct_text else (question.correct_answers if question else []) %}
+              {% for opt in existing_options %}
+                <label class="list-group-item d-flex align-items-center">
+                  <input class="form-check-input me-2 option-correct" type="checkbox"
+                         {% if opt in existing_correct %}checked{% endif %}>
+                  <span class="flex-grow-1 option-text">{{ opt }}</span>
+                  <button type="button" class="btn btn-sm btn-outline-danger ms-2 remove-option">×</button>
+                </label>
+              {% endfor %}
+            </div>
+
+            <div class="form-text">
+              Для типов «один вариант» и «несколько вариантов» сначала добавьте варианты,
+              затем отметьте галочкой правильные.
+            </div>
+          </div>
+
+          <div class="mb-3" id="text-correct-block">
+            <label for="text-correct" class="form-label">Правильные ответы (по одному на строку)</label>
+            <textarea class="form-control" id="text-correct" rows="4">{{ correct_text if correct_text is defined else (question.correct_answers | join('\n') if question else '') }}</textarea>
+            <div class="form-text">
+              Для развёрнутого ответа впишите одно или несколько допустимых слов/предложений.
+              При решении ответ пользователя будет сравниваться с ними без учёта регистра.
+            </div>
+          </div>
+
+          {# Эти поля заполняются JavaScript перед отправкой формы, чтобы backend остался прежним #}
+          <textarea id="options-hidden" name="options" class="d-none"></textarea>
+          <textarea id="correct-hidden" name="correct_answers" class="d-none"></textarea>
+
+          <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-primary">
+              {% if mode == 'new' %}Создать{% else %}Сохранить{% endif %}
+            </button>
+            <a class="btn btn-secondary"
+               href="{{ url_for('questions_list', material_id=material_id) }}">
+              Отмена
+            </a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+<script>
+  (function () {
+    const form = document.getElementById('question-form');
+    const optionsBlock = document.getElementById('options-block');
+    const textCorrectBlock = document.getElementById('text-correct-block');
+    const optionsList = document.getElementById('options-list');
+    const newOptionInput = document.getElementById('new-option-text');
+    const addOptionBtn = document.getElementById('add-option-btn');
+    const optionsHidden = document.getElementById('options-hidden');
+    const correctHidden = document.getElementById('correct-hidden');
+    const questionTypeSelect = document.getElementById('question_type');
+    const textCorrect = document.getElementById('text-correct');
+
+    function addOption(text, isCorrect) {
+      if (!text) return;
+      const label = document.createElement('label');
+      label.className = 'list-group-item d-flex align-items-center';
+
+      const checkbox = document.createElement('input');
+      checkbox.type = 'checkbox';
+      checkbox.className = 'form-check-input me-2 option-correct';
+      checkbox.checked = !!isCorrect;
+
+      // Для типов с одним вариантом ответа позволяем выбрать только один чекбокс
+      checkbox.addEventListener('change', function () {
+        const type = questionTypeSelect.value;
+        if (type === 'single_choice' && checkbox.checked) {
+          const all = optionsList.querySelectorAll('.option-correct');
+          all.forEach(function (cb) {
+            if (cb !== checkbox) cb.checked = false;
+          });
+        }
+      });
+
+      const span = document.createElement('span');
+      span.className = 'flex-grow-1 option-text';
+      span.textContent = text;
+
+      const removeBtn = document.createElement('button');
+      removeBtn.type = 'button';
+      removeBtn.className = 'btn btn-sm btn-outline-danger ms-2 remove-option';
+      removeBtn.textContent = '×';
+      removeBtn.addEventListener('click', function () {
+        label.remove();
+      });
+
+      label.appendChild(checkbox);
+      label.appendChild(span);
+      label.appendChild(removeBtn);
+      optionsList.appendChild(label);
+    }
+
+    addOptionBtn.addEventListener('click', function () {
+      const text = newOptionInput.value.trim();
+      if (!text) return;
+      addOption(text, false);
+      newOptionInput.value = '';
+      newOptionInput.focus();
+    });
+
+    /* Только показываем/скрываем блоки — ничего не очищаем, чтобы текст вопроса,
+       пояснение, варианты и правильные ответы сохранялись при смене типа. */
+    function applyTypeVisibility() {
+      const type = questionTypeSelect.value;
+      if (type === 'text_answer') {
+        optionsBlock.classList.add('d-none');
+        textCorrectBlock.classList.remove('d-none');
+      } else {
+        optionsBlock.classList.remove('d-none');
+        textCorrectBlock.classList.add('d-none');
+      }
+    }
+
+    applyTypeVisibility();
+    questionTypeSelect.addEventListener('change', applyTypeVisibility);
+
+    form.addEventListener('submit', function () {
+      const type = questionTypeSelect.value;
+
+      if (type === 'text_answer') {
+        // Для развёрнутого ответа варианты не нужны, берём только правильные формулировки.
+        const lines = textCorrect.value.split('\n')
+          .map(function (l) { return l.trim(); })
+          .filter(function (l) { return l.length > 0; });
+        optionsHidden.value = '';
+        correctHidden.value = lines.join('\n');
+        return;
+      }
+
+      const optionLabels = optionsList.querySelectorAll('.list-group-item');
+      const options = [];
+      const correct = [];
+
+      optionLabels.forEach(function (label) {
+        const text = label.querySelector('.option-text').textContent.trim();
+        const checked = label.querySelector('.option-correct').checked;
+        if (text) {
+          options.push(text);
+          if (checked) {
+            correct.push(text);
+          }
+        }
+      });
+
+      optionsHidden.value = options.join('\n');
+      correctHidden.value = correct.join('\n');
+    });
+  })();
+</script>
+{% endblock %}
+

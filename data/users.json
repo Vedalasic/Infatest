@@ -1,0 +1,36 @@
+{
+  "users": [
+    {
+      "username": "teacher11",
+      "password_hash": "scrypt:32768:8:1$7qwfZtGCV9cqyZxw$138d87a7937576c2e327a8892538d16ab886d4b313d70dbf39f2b0b832bb427c1e04a682c05c30118c6cd0b9683026801eae3d50f6b3050b50b332286063e4ac",
+      "role": "teacher",
+      "first_name": "Мария",
+      "last_name": "Иванова",
+      "last_seen": "2026-04-10 15:36:52"
+    },
+    {
+      "username": "ivan11",
+      "password_hash": "123",
+      "role": "student",
+      "first_name": "Иван",
+      "last_name": "Петров",
+      "last_seen": "2026-03-12 10:22:00"
+    },
+    {
+      "username": "anna11",
+      "password_hash": "scrypt:32768:8:1$V6G2gb4PLq1Pn7Ka$0fe84031f9b4bcacac489ab70b56c3be3ba1cef0b98b50f0b4fee1f15089226aa1c25b169e48fcf8375b80ae52e693e2675c564f1b9b034584272f7f0c7c076e",
+      "role": "student",
+      "first_name": "Анна",
+      "last_name": "Смирнова",
+      "last_seen": "2026-04-10 15:36:05"
+    },
+    {
+      "username": "teacher22",
+      "password_hash": "123",
+      "role": "teacher",
+      "first_name": "Алексей",
+      "last_name": "Соколов",
+      "last_seen": ""
+    }
+  ]
+}

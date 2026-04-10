@@ -1,0 +1,143 @@
+{# Контекст: result; опционально chat_student_display_name, chat_teacher_display_name, chat_teacher_username #}
+<div id="result-chat"
+     data-result-id="{{ result.result_id }}"
+     data-messages-url="{{ url_for('api_result_messages', result_id=result.result_id) }}">
+  <button type="button" class="btn btn-outline-primary" data-bs-toggle="modal" data-bs-target="#resultChatModal" id="resultChatOpenBtn">
+    {% if session.get('role') == 'teacher' %}
+      Переписка с учеником
+    {% else %}
+      Диалог с учителем
+    {% endif %}
+  </button>
+</div>
+
+<div class="modal fade" id="resultChatModal" tabindex="-1" aria-labelledby="resultChatModalLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-scrollable modal-lg">
+    <div class="modal-content">
+      <div class="modal-header">
+        <h5 class="modal-title" id="resultChatModalLabel">Переписка по результату</h5>
+        <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Закрыть"></button>
+      </div>
+      <div class="modal-body p-0">
+        <div class="border-bottom px-3 py-2 small text-muted">
+          {% set sdn = chat_student_display_name if chat_student_display_name is defined else (result.student_username|user_display_name) %}
+          {% set tu = chat_teacher_username if chat_teacher_username is defined else 'admin' %}
+          {% set tdn = chat_teacher_display_name if chat_teacher_display_name is defined else (tu|user_display_name) %}
+          <div><strong>Ученик:</strong> {{ sdn }} <span class="text-body-secondary">({{ result.student_username }})</span></div>
+          <div><strong>Учитель (автор материала):</strong> {{ tdn }} <span class="text-body-secondary">({{ tu }})</span></div>
+          <div class="mt-1">{{ result.material_title }} · {{ result.date }}</div>
+        </div>
+        <div class="p-3" style="max-height: 45vh; overflow-y: auto;" id="resultChatScroll">
+          <div id="resultChatMessages">
+            {% for m in result.result_messages or [] %}
+              {% set an = (m.author_display_name if m.author_display_name else (m.author_username|user_display_name)) %}
+              <div class="mb-2 p-2 rounded {% if m.author_role == 'teacher' %}bg-primary-subtle ms-md-4{% else %}bg-light me-md-4{% endif %}">
+                <div class="small text-muted"><strong>{{ an }}</strong> · @{{ m.author_username }} · {{ m.created_at }}
+                  {% if m.author_role == 'teacher' %}· учитель{% else %}· ученик{% endif %}
+                </div>
+                <div class="result-chat-text">{{ m.text }}</div>
+              </div>
+            {% else %}
+              <p class="text-muted small mb-0" id="resultChatEmpty">Пока нет сообщений — напишите первым.</p>
+            {% endfor %}
+          </div>
+        </div>
+      </div>
+      <div class="modal-footer flex-column align-items-stretch gap-2">
+        <label class="form-label small mb-0 text-muted" for="resultChatInput">Ваше сообщение</label>
+        <textarea class="form-control" id="resultChatInput" rows="3" placeholder="Текст сообщения…" maxlength="2000"></textarea>
+        <div class="d-flex justify-content-between align-items-center w-100 gap-2">
+          <span class="small text-danger flex-grow-1" id="resultChatError"></span>
+          <button type="button" class="btn btn-primary" id="resultChatSend">Отправить</button>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<style>
+  .result-chat-text {
+    white-space: pre-wrap;
+    word-break: break-word;
+  }
+</style>
+<script>
+(function () {
+  const root = document.getElementById('result-chat');
+  if (!root || !root.dataset.messagesUrl) return;
+  const url = root.dataset.messagesUrl;
+  const scrollEl = document.getElementById('resultChatScroll');
+  const listEl = document.getElementById('resultChatMessages');
+  const input = document.getElementById('resultChatInput');
+  const sendBtn = document.getElementById('resultChatSend');
+  const errEl = document.getElementById('resultChatError');
+
+  function scrollToBottom() {
+    if (scrollEl) scrollEl.scrollTop = scrollEl.scrollHeight;
+  }
+
+  function escapeHtml(s) {
+    if (s == null || s === undefined) return '';
+    var t = document.createElement('div');
+    t.textContent = String(s);
+    return t.innerHTML;
+  }
+
+  function appendMessage(m) {
+    document.getElementById('resultChatEmpty')?.remove();
+    const wrap = document.createElement('div');
+    const teacher = m.author_role === 'teacher';
+    wrap.className = 'mb-2 p-2 rounded ' + (teacher ? 'bg-primary-subtle ms-md-4' : 'bg-light me-md-4');
+    const meta = document.createElement('div');
+    meta.className = 'small text-muted';
+    var label = (m.author_display_name && String(m.author_display_name).trim())
+      ? m.author_display_name
+      : m.author_username;
+    meta.innerHTML = '<strong>' + escapeHtml(label) + '</strong> · @' + escapeHtml(m.author_username) + ' · ' +
+      escapeHtml(m.created_at) + (teacher ? ' · учитель' : ' · ученик');
+    const body = document.createElement('div');
+    body.className = 'result-chat-text';
+    body.textContent = m.text;
+    wrap.appendChild(meta);
+    wrap.appendChild(body);
+    listEl.appendChild(wrap);
+    scrollToBottom();
+  }
+
+  sendBtn.addEventListener('click', async function () {
+    errEl.textContent = '';
+    const text = (input.value || '').trim();
+    if (!text) return;
+    sendBtn.disabled = true;
+    try {
+      const r = await fetch(url, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({ text: text })
+      });
+      const data = await r.json();
+      if (!data.ok) {
+        errEl.textContent = data.error || 'Ошибка';
+        return;
+      }
+      appendMessage(data.message);
+      input.value = '';
+    } catch (e) {
+      errEl.textContent = 'Не удалось отправить сообщение.';
+    } finally {
+      sendBtn.disabled = false;
+    }
+  });
+
+  document.getElementById('resultChatModal')?.addEventListener('shown.bs.modal', function () {
+    scrollToBottom();
+    input.focus();
+  });
+
+  if (window.location.hash === '#result-chat') {
+    setTimeout(function () {
+      document.getElementById('resultChatOpenBtn')?.click();
+    }, 100);
+  }
+})();
+</script>

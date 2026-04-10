@@ -1,0 +1,81 @@
+{% extends "base.html" %}
+{% block title %}Диалоги{% endblock %}
+{% block content %}
+<div class="d-flex flex-wrap justify-content-between align-items-start gap-3 mb-3">
+  <div>
+    <h2 class="mb-1">Диалоги по результатам</h2>
+    <p class="text-muted small mb-0">
+      {% if is_teacher %}
+        Только переписки, где уже есть сообщения. Сверху — с более свежим последним сообщением.
+      {% else %}
+        Только диалоги с сообщениями. Сверху — те, где недавно писали.
+      {% endif %}
+    </p>
+  </div>
+  <div class="d-flex flex-wrap gap-2">
+    {% if is_teacher %}
+      <a class="btn btn-outline-secondary" href="{{ url_for('teacher_profile') }}">В профиль</a>
+    {% else %}
+      <a class="btn btn-outline-secondary" href="{{ url_for('student_profile') }}">В профиль</a>
+    {% endif %}
+    <a class="btn btn-outline-secondary" href="{{ url_for('results') }}">Все результаты</a>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-body p-0">
+    <div class="table-responsive-md">
+      <table class="table table-hover align-middle mb-0">
+        <thead class="table-light">
+          <tr>
+            {% if is_teacher %}
+              <th>Ученик</th>
+            {% endif %}
+            <th>Дата попытки</th>
+            <th>Материал</th>
+            <th class="text-center">Сообщений</th>
+            <th>Последнее сообщение</th>
+            <th class="text-end">Диалог</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for row in rows %}
+            {% set r = row.result %}
+            <tr class="{% if row.is_unread %}table-active{% endif %}">
+              {% if is_teacher %}
+                <td>
+                  <div class="fw-medium">{{ row.student_display_name }}</div>
+                  <div class="small text-muted">{{ r.student_username }}</div>
+                </td>
+              {% endif %}
+              <td>{{ r.date }}</td>
+              <td>{{ r.material_title }}</td>
+              <td class="text-center">{{ row.msg_count }}</td>
+              <td>
+                {% if row.is_unread %}
+                  <span class="badge text-bg-danger mb-1">Непрочитано</span>
+                {% endif %}
+                <div class="small text-muted" title="{{ row.last_preview }}">
+                  {{ row.last_preview }}
+                </div>
+                {% if row.last_message_at %}
+                  <div class="small text-muted">{{ row.last_message_at }}</div>
+                {% endif %}
+              </td>
+              <td class="text-end">
+                <a class="btn btn-sm btn-primary" href="{{ url_for('result_view', result_id=r.result_id) }}#result-chat">Открыть</a>
+              </td>
+            </tr>
+          {% else %}
+            <tr>
+              <td colspan="{{ 5 + (1 if is_teacher else 0) }}" class="text-center text-muted py-4">
+                Нет диалогов с сообщениями. Откройте результат теста и напишите в чат — тогда переписка появится здесь.
+              </td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+{% endblock %}

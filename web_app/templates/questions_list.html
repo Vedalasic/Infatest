@@ -1,0 +1,67 @@
+{% extends "base.html" %}
+{% block title %}Вопросы — {{ material.title }}{% endblock %}
+{% block content %}
+<h2 class="mb-3">Вопросы к материалу: «{{ material.title }}»</h2>
+
+<div class="mb-3 d-flex gap-2">
+  <a class="btn btn-primary"
+     href="{{ url_for('question_new', material_id=material_id) }}">
+    Добавить вопрос
+  </a>
+  <a class="btn btn-outline-secondary"
+     href="{{ url_for('material_edit', material_id=material_id) }}">
+    К редактированию материала
+  </a>
+</div>
+
+<div class="card">
+  <div class="card-body">
+    {% if material.tests %}
+      <div class="table-responsive">
+        <table class="table table-striped align-middle">
+          <thead>
+            <tr>
+              <th>#</th>
+              <th>Тип</th>
+              <th>Текст вопроса</th>
+              <th>Действия</th>
+            </tr>
+          </thead>
+          <tbody>
+            {% for q in material.tests %}
+              <tr>
+                <td>{{ loop.index }}</td>
+                <td>
+                  {% if q.question_type.value == 'single_choice' %}
+                    Один вариант
+                  {% elif q.question_type.value == 'multiple_choice' %}
+                    Несколько вариантов
+                  {% else %}
+                    Текстовый ответ
+                  {% endif %}
+                </td>
+                <td>{{ q.question_text|truncate(80) }}</td>
+                <td>
+                  <a class="btn btn-sm btn-outline-primary"
+                     href="{{ url_for('question_edit', material_id=material_id, q_index=loop.index0) }}">
+                    Редактировать
+                  </a>
+                  <form method="post"
+                        action="{{ url_for('question_delete', material_id=material_id, q_index=loop.index0) }}"
+                        class="d-inline"
+                        onsubmit="return confirm('Удалить этот вопрос?');">
+                    <button type="submit" class="btn btn-sm btn-outline-danger">Удалить</button>
+                  </form>
+                </td>
+              </tr>
+            {% endfor %}
+          </tbody>
+        </table>
+      </div>
+    {% else %}
+      <p class="mb-0 text-muted">Для этого материала ещё нет тестовых вопросов.</p>
+    {% endif %}
+  </div>
+</div>
+{% endblock %}
+

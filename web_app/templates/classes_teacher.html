@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Классы учителя{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h2 class="mb-0">Мои классы</h2>
+  <a class="btn btn-primary" href="{{ url_for('classes_new') }}">Создать класс</a>
+</div>
+
+<div class="mb-3">
+  <span class="badge text-bg-warning">Заявок в классы: {{ pending_count }}</span>
+</div>
+
+<div class="list-group">
+  {% for c in classes %}
+    <a class="list-group-item list-group-item-action d-flex justify-content-between align-items-center"
+       href="{{ url_for('class_view', class_id=c.class_id) }}">
+      <span>{{ c.name }}</span>
+      <span class="small text-muted">{{ c.created_at }}</span>
+    </a>
+  {% else %}
+    <div class="text-muted">Классов пока нет.</div>
+  {% endfor %}
+</div>
+{% endblock %}
+

@@ -1,0 +1,166 @@
+{% extends "base.html" %}
+{% block extra_head %}
+  <link href="https://cdn.quilljs.com/1.3.7/quill.snow.css" rel="stylesheet">
+{% endblock %}
+{% block title %}
+  {% if mode == 'new' %}Новый материал{% else %}Редактирование материала{% endif %} — Инфотест
+{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-lg-8">
+    <div class="card">
+      <div class="card-body">
+        <h3 class="card-title mb-3">
+          {% if mode == 'new' %}Добавление нового материала{% else %}Редактирование материала{% endif %}
+        </h3>
+
+        <form method="post" id="material-form" novalidate>
+          <div class="mb-3">
+            <label for="title" class="form-label">Название</label>
+            <input type="text" class="form-control" id="title" name="title"
+                   value="{{ material.title if material else '' }}" required>
+          </div>
+
+          <div class="mb-3">
+            <label class="form-label">Содержание</label>
+            <div class="material-editor">
+              <div id="quill-editor"></div>
+            </div>
+            <textarea name="content" id="content" class="d-none" aria-hidden="true"></textarea>
+            <script type="application/json" id="content-json">{{ (material.content if material else '')|tojson }}</script>
+          </div>
+
+          <div class="mb-3">
+            <label for="video_url" class="form-label">URL видео (необязательно)</label>
+            <input type="url" class="form-control" id="video_url" name="video_url"
+                   value="{{ material.video_url if material and material.video_url else '' }}">
+          </div>
+
+          {% if mode == 'edit' and material_id is defined %}
+          <div class="mb-3">
+            <a class="btn btn-primary" href="{{ url_for('questions_list', material_id=material_id) }}">Редактировать вопросы</a>
+          </div>
+          {% endif %}
+
+          <div class="form-check mb-3">
+            <input class="form-check-input" type="checkbox" value="1" id="show_correct_answers" name="show_correct_answers"
+                   {% if not material or material.show_correct_answers %}checked{% endif %}>
+            <label class="form-check-label" for="show_correct_answers">
+              Показывать ученикам правильные ответы после прохождения теста
+            </label>
+          </div>
+
+          <div class="form-check mb-3">
+            <input class="form-check-input" type="checkbox" value="1" id="is_closed" name="is_closed"
+                   {% if material and material.is_closed %}checked{% endif %}>
+            <label class="form-check-label" for="is_closed">
+              Закрытая тема (ученики увидят только кнопку “подать заявку”)
+            </label>
+          </div>
+
+          {% if mode == 'new' %}
+          <div class="alert alert-secondary">
+            После создания материала откройте его снова через «Редактировать» — там можно будет добавить вопросы теста.
+          </div>
+          {% endif %}
+
+          <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-primary">
+              {% if mode == 'new' %}Создать{% else %}Сохранить{% endif %}
+            </button>
+            <a class="btn btn-secondary" href="{{ url_for('teacher_profile') }}">
+              Отмена
+            </a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+
+{% block extra_scripts %}
+<script src="https://cdn.quilljs.com/1.3.7/quill.js"></script>
+<script src="{{ url_for('static', filename='quill-image-resize.min.js') }}"></script>
+<script>
+(function () {
+  var jsonEl = document.getElementById('content-json');
+  var initialHtml = '';
+  if (jsonEl && jsonEl.textContent) {
+    try {
+      initialHtml = JSON.parse(jsonEl.textContent);
+    } catch (e) {
+      initialHtml = '';
+    }
+  }
+
+  var uploadUrl = {{ url_for('material_upload_editor_image')|tojson }};
+
+  /* Шрифт, размер, жирный/курсив/подчёркивание/зачёркивание, подстрочный/надстрочный, изображение */
+  var toolbarOptions = [
+    [{ font: [] }],
+    [{ size: ['small', false, 'large', 'huge'] }],
+    ['bold', 'italic', 'underline', 'strike'],
+    [{ script: 'sub' }, { script: 'super' }],
+    ['image']
+  ];
+
+  var quill = new Quill('#quill-editor', {
+    theme: 'snow',
+    modules: {
+      toolbar: toolbarOptions,
+      imageResize: {
+        modules: ['Resize', 'DisplaySize', 'Toolbar']
+      }
+    },
+    placeholder: 'Введите текст темы…'
+  });
+
+  quill.getModule('toolbar').addHandler('image', function () {
+    var input = document.createElement('input');
+    input.setAttribute('type', 'file');
+    input.setAttribute('accept', 'image/png,image/jpeg,image/gif,image/webp');
+    input.click();
+    input.onchange = function () {
+      var file = input.files[0];
+      if (!file) return;
+      var fd = new FormData();
+      fd.append('file', file);
+      fetch(uploadUrl, { method: 'POST', body: fd, credentials: 'same-origin' })
+        .then(function (r) { return r.json(); })
+        .then(function (data) {
+          if (data.ok && data.url) {
+            var range = quill.getSelection(true);
+            var index = range ? range.index : Math.max(0, quill.getLength() - 1);
+            quill.insertEmbed(index, 'image', data.url);
+            quill.setSelection(index + 1);
+          } else {
+            alert(data.error || 'Не удалось загрузить изображение');
+          }
+        })
+        .catch(function () {
+          alert('Ошибка загрузки изображения');
+        });
+    };
+  });
+
+  if (initialHtml) {
+    quill.clipboard.dangerouslyPasteHTML(initialHtml);
+  }
+
+  var form = document.getElementById('material-form');
+  var contentField = document.getElementById('content');
+
+  form.addEventListener('submit', function (e) {
+    var text = quill.getText().replace(/\u00a0/g, ' ').trim();
+    var hasImg = quill.root.querySelector('img');
+    if (!text && !hasImg) {
+      e.preventDefault();
+      alert('Введите содержание материала.');
+      return false;
+    }
+    contentField.value = quill.root.innerHTML;
+  });
+})();
+</script>
+{% endblock %}

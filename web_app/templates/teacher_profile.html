@@ -1,0 +1,62 @@
+{% extends "base.html" %}
+{% block title %}Профиль учителя{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-start gap-3 mb-3">
+  <div>
+    <h2 class="mb-1">Профиль учителя</h2>
+    <div class="text-muted small">
+      {{ u.first_name }} {{ u.last_name }} · {{ u.username }} · Последний вход: {{ u.last_seen or '—' }}
+    </div>
+  </div>
+  <div class="d-flex gap-2">
+    <a class="btn btn-outline-secondary" href="{{ url_for('profile_edit') }}">Редактировать</a>
+    <a class="btn btn-outline-secondary" href="{{ url_for('profile_password') }}">Сменить пароль</a>
+    <a class="btn btn-outline-danger" href="{{ url_for('logout') }}">Выйти</a>
+  </div>
+</div>
+
+<div class="card mb-3">
+  <div class="card-body">
+    <h5 class="card-title mb-3">Навигация</h5>
+    <div class="d-flex flex-wrap gap-2">
+      <a class="btn btn-outline-primary" href="{{ url_for('classes_home') }}">Классы</a>
+      <a class="btn btn-outline-secondary" href="{{ url_for('results') }}">Результаты</a>
+      <a class="btn btn-outline-primary" href="{{ url_for('all_dialogs') }}">Все диалоги</a>
+      <a class="btn btn-outline-secondary" href="{{ url_for('access_requests') }}">Заявки</a>
+    </div>
+  </div>
+</div>
+
+<div class="card mb-3">
+  <div class="card-body">
+    <div class="text-muted small">Создано материалов</div>
+    <div class="fs-3 fw-semibold">{{ materials|length }}</div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title mb-3">Ваши материалы</h5>
+    <div class="list-group">
+      {% for m in materials %}
+        <div class="list-group-item d-flex justify-content-between align-items-center">
+          <div>
+            <div class="fw-semibold">{{ m.title }}</div>
+            <div class="small text-muted">order {{ m.order }}</div>
+          </div>
+          <div class="d-flex flex-wrap gap-2 justify-content-end">
+            <a class="btn btn-sm btn-primary" href="{{ url_for('material_edit', material_id=m.material_id) }}">Редактировать</a>
+          </div>
+        </div>
+      {% else %}
+        <div class="text-muted">Материалов пока нет.</div>
+      {% endfor %}
+    </div>
+    <div class="d-flex flex-wrap gap-2 justify-content-end mt-3 pt-3 border-top">
+      <a class="btn btn-outline-primary" href="{{ url_for('material_new') }}">Добавить материал</a>
+      <a class="btn btn-outline-primary" href="{{ url_for('material_upload_word') }}">Импорт из Word</a>
+    </div>
+  </div>
+</div>
+{% endblock %}
+

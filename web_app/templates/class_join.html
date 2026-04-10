@@ -1,0 +1,14 @@
+{% extends "base.html" %}
+{% block title %}Вступление в класс{% endblock %}
+{% block content %}
+<h2 class="mb-3">Вступление в класс</h2>
+<div class="card card-body">
+  <p>Вы переходите в класс: <strong>{{ classroom.name }}</strong>.</p>
+  <p class="text-muted small">После отправки заявки учитель сможет принять или отклонить её.</p>
+  <form method="post">
+    <button class="btn btn-primary" type="submit">Отправить заявку</button>
+    <a class="btn btn-secondary" href="{{ url_for('classes_home') }}">Отмена</a>
+  </form>
+</div>
+{% endblock %}
+

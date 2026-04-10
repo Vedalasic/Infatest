@@ -1,0 +1,247 @@
+{
+  "results": [
+    {
+      "result_id": "res_ivan_cyber_1",
+      "student_username": "ivan11",
+      "material_title": "Основы кибербезопасности",
+      "test_id": "test_cyber",
+      "date": "2026-03-11 12:10:00",
+      "correct_answers": 2,
+      "total_questions": 2,
+      "percentage": 100.0,
+      "mistakes": [],
+      "details": [],
+      "result_messages": [],
+      "assignment_id": "as_11i_cyber_1",
+      "total_duration_sec": 120.5,
+      "question_timings": [
+        {
+          "question_index": 0,
+          "duration_sec": 52.4
+        },
+        {
+          "question_index": 1,
+          "duration_sec": 68.1
+        }
+      ]
+    },
+    {
+      "result_id": "res_anna_cyber_1",
+      "student_username": "anna11",
+      "material_title": "Основы кибербезопасности",
+      "test_id": "test_cyber",
+      "date": "2026-03-11 12:20:00",
+      "correct_answers": 1,
+      "total_questions": 2,
+      "percentage": 50.0,
+      "mistakes": [
+        "Вопрос 2: Какой метод защиты требует пароль и дополнительный код?\nВаш ответ: ответ не дан\nПравильный ответ: 2FA, двухфакторная аутентификация"
+      ],
+      "details": [],
+      "result_messages": [],
+      "assignment_id": "as_11i_cyber_1",
+      "total_duration_sec": 144.0,
+      "question_timings": [
+        {
+          "question_index": 0,
+          "duration_sec": 70.0
+        },
+        {
+          "question_index": 1,
+          "duration_sec": 74.0
+        }
+      ]
+    },
+    {
+      "result_id": "res_ivan_net_1",
+      "student_username": "ivan11",
+      "material_title": "Безопасность сети",
+      "test_id": "test_network",
+      "date": "2026-03-12 09:10:00",
+      "correct_answers": 2,
+      "total_questions": 2,
+      "percentage": 100.0,
+      "mistakes": [],
+      "details": [],
+      "result_messages": [],
+      "assignment_id": "as_11i_net_1",
+      "total_duration_sec": 111.3,
+      "question_timings": [
+        {
+          "question_index": 0,
+          "duration_sec": 60.2
+        },
+        {
+          "question_index": 1,
+          "duration_sec": 51.1
+        }
+      ]
+    },
+    {
+      "result_id": "res_anna_net_1",
+      "student_username": "anna11",
+      "material_title": "Безопасность сети",
+      "test_id": "test_network",
+      "date": "2026-03-12 09:25:00",
+      "correct_answers": 1,
+      "total_questions": 2,
+      "percentage": 50.0,
+      "mistakes": [
+        "Вопрос 1: Выберите правильные меры защиты аккаунта.\nВаши ответы: Сложный уникальный пароль\nПравильные ответы: Сложный уникальный пароль, Включить 2FA"
+      ],
+      "details": [],
+      "result_messages": [],
+      "assignment_id": "as_11i_net_1",
+      "total_duration_sec": 136.0,
+      "question_timings": [
+        {
+          "question_index": 0,
+          "duration_sec": 79.0
+        },
+        {
+          "question_index": 1,
+          "duration_sec": 57.0
+        }
+      ]
+    },
+    {
+      "result_id": "17e1d3fa7403e14fb6ab6e7dfc7e3529",
+      "student_username": "Иван",
+      "material_title": "Основы кибербезопасности",
+      "test_id": "43ef463878670b13ccb468f3790e072a",
+      "date": "2026-04-10 15:23:39",
+      "correct_answers": 0,
+      "total_questions": 2,
+      "percentage": 0.0,
+      "mistakes": [
+        "Вопрос 1: Что такое фишинг?\nВаш ответ: ответ не дан\nПравильный ответ: Поддельное сообщение для кражи данных",
+        "Вопрос 2: Какой метод защиты требует пароль и дополнительный код?\nВаш ответ: абоба\nПравильный ответ: 2FA, двухфакторная аутентификация\nОценка ИИ: Ответ не засчитан: совпадение с эталоном не подтверждено дополнительной проверкой."
+      ],
+      "details": [
+        {
+          "question_index": 0,
+          "question_text": "Что такое фишинг?",
+          "question_type": "single_choice",
+          "options": [
+            "Антивирус",
+            "Поддельное сообщение для кражи данных",
+            "Резервное копирование"
+          ],
+          "user_answer": "",
+          "correct_answers": [
+            "Поддельное сообщение для кражи данных"
+          ],
+          "is_correct": false,
+          "explanation": "Фишинг — это социальная инженерия с целью украсть данные.",
+          "ai_reason": "",
+          "duration_sec": 44.97
+        },
+        {
+          "question_index": 1,
+          "question_text": "Какой метод защиты требует пароль и дополнительный код?",
+          "question_type": "text_answer",
+          "options": [],
+          "user_answer": "абоба",
+          "correct_answers": [
+            "2FA",
+            "двухфакторная аутентификация"
+          ],
+          "is_correct": false,
+          "explanation": "2FA использует минимум два фактора подтверждения личности.",
+          "ai_reason": "Ответ не засчитан: совпадение с эталоном не подтверждено дополнительной проверкой.",
+          "duration_sec": 33.83
+        }
+      ],
+      "result_messages": [],
+      "assignment_id": "",
+      "total_duration_sec": 78.8,
+      "question_timings": [
+        {
+          "question_index": 0,
+          "duration_sec": 44.97
+        },
+        {
+          "question_index": 1,
+          "duration_sec": 33.83
+        }
+      ]
+    },
+    {
+      "result_id": "0a2fc441216b7f169dbda7e3ad1e3d8d",
+      "student_username": "anna11",
+      "material_title": "Безопасность сети",
+      "test_id": "ef388fb3c31a4f9a80a76054a302e718",
+      "date": "2026-04-10 15:36:25",
+      "correct_answers": 0,
+      "total_questions": 2,
+      "percentage": 0.0,
+      "mistakes": [
+        "Вопрос 1: Выберите правильные меры защиты аккаунта.\nВаши ответы: Включить 2FA\nПравильные ответы: Сложный уникальный пароль, Включить 2FA",
+        "Вопрос 2: Как называется копирование данных для восстановления после потери?\nВаш ответ: Шифрование\nПравильный ответ: Резервное копирование"
+      ],
+      "details": [
+        {
+          "question_index": 0,
+          "question_text": "Выберите правильные меры защиты аккаунта.",
+          "question_type": "multiple_choice",
+          "options": [
+            "Одинаковый пароль везде",
+            "Сложный уникальный пароль",
+            "Включить 2FA",
+            "Передавать пароль друзьям"
+          ],
+          "user_answer": [
+            "Включить 2FA"
+          ],
+          "correct_answers": [
+            "Сложный уникальный пароль",
+            "Включить 2FA"
+          ],
+          "is_correct": false,
+          "explanation": "Комбинация надежного пароля и 2FA заметно повышает безопасность.",
+          "ai_reason": "",
+          "duration_sec": 3.34
+        },
+        {
+          "question_index": 1,
+          "question_text": "Как называется копирование данных для восстановления после потери?",
+          "question_type": "single_choice",
+          "options": [
+            "Шифрование",
+            "Резервное копирование",
+            "Фишинг"
+          ],
+          "user_answer": "Шифрование",
+          "correct_answers": [
+            "Резервное копирование"
+          ],
+          "is_correct": false,
+          "explanation": "Резервное копирование позволяет вернуть данные после сбоя или атаки.",
+          "ai_reason": "",
+          "duration_sec": 1.96
+        }
+      ],
+      "result_messages": [
+        {
+          "author_role": "student",
+          "author_username": "anna11",
+          "author_display_name": "Анна Смирнова",
+          "text": "Что не так?",
+          "created_at": "2026-04-10 15:36:39"
+        }
+      ],
+      "assignment_id": "b5cab35a40c606f9defbd210dff2e9fc",
+      "total_duration_sec": 5.3,
+      "question_timings": [
+        {
+          "question_index": 0,
+          "duration_sec": 3.34
+        },
+        {
+          "question_index": 1,
+          "duration_sec": 1.96
+        }
+      ]
+    }
+  ]
+}

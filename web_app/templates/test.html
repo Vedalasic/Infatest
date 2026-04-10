@@ -1,0 +1,95 @@
+{% extends "base.html" %}
+{% block title %}Тест — {{ material.title }}{% endblock %}
+{% block content %}
+<h2 class="mb-3">Тест по теме: {{ material.title }}</h2>
+<form method="post" id="test-form">
+  <input type="hidden" name="question_timings" id="question_timings" value="[]">
+  {% for q in material.tests %}
+    {% set q_index = loop.index0 %}
+    <div class="card mb-3">
+      <div class="card-body">
+        <h5 class="card-title">Вопрос {{ loop.index }} из {{ material.tests|length }}</h5>
+        <p class="card-text">{{ q.question_text }}</p>
+
+        {% if q.question_type.value == 'single_choice' %}
+          {% for option in q.options %}
+            <div class="form-check">
+              <input class="form-check-input" type="radio"
+                     name="q{{ q_index }}" id="q{{ q_index }}_{{ loop.index0 }}"
+                     value="{{ option }}">
+              <label class="form-check-label" for="q{{ q_index }}_{{ loop.index0 }}">
+                {{ option }}
+              </label>
+            </div>
+          {% endfor %}
+
+        {% elif q.question_type.value == 'multiple_choice' %}
+          {% for option in q.options %}
+            <div class="form-check">
+              <input class="form-check-input" type="checkbox"
+                     name="q{{ q_index }}" id="q{{ q_index }}_{{ loop.index0 }}"
+                     value="{{ option }}">
+              <label class="form-check-label" for="q{{ q_index }}_{{ loop.index0 }}">
+                {{ option }}
+              </label>
+            </div>
+          {% endfor %}
+
+        {% else %}
+          <textarea class="form-control" name="q{{ q_index }}" rows="3"></textarea>
+        {% endif %}
+      </div>
+    </div>
+  {% endfor %}
+
+  <div class="d-flex gap-2">
+    <button type="submit" class="btn btn-success">Завершить тест</button>
+    <a class="btn btn-secondary" href="{{ url_for('tests_catalog') }}">К списку тестов</a>
+  </div>
+</form>
+{% endblock %}
+{% block extra_scripts %}
+<script>
+(function () {
+  const form = document.getElementById('test-form');
+  if (!form) return;
+  const timingsField = document.getElementById('question_timings');
+  const cards = Array.from(form.querySelectorAll('.card.mb-3'));
+  const timings = cards.map((_, idx) => ({ question_index: idx, duration_sec: 0 }));
+  let activeIndex = cards.length ? 0 : -1;
+  let lastTick = Date.now();
+
+  function flushActive() {
+    if (activeIndex < 0) return;
+    const now = Date.now();
+    const delta = (now - lastTick) / 1000;
+    timings[activeIndex].duration_sec += Math.max(0, delta);
+    lastTick = now;
+  }
+
+  cards.forEach((card, idx) => {
+    card.addEventListener('focusin', function () {
+      if (activeIndex !== idx) {
+        flushActive();
+        activeIndex = idx;
+      }
+    });
+    card.addEventListener('pointerenter', function () {
+      if (activeIndex !== idx) {
+        flushActive();
+        activeIndex = idx;
+      }
+    });
+  });
+
+  form.addEventListener('submit', function () {
+    flushActive();
+    timings.forEach((t) => {
+      t.duration_sec = Number((t.duration_sec || 0).toFixed(2));
+    });
+    timingsField.value = JSON.stringify(timings);
+  });
+})();
+</script>
+{% endblock %}
+

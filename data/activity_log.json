@@ -1,0 +1,85 @@
+{
+  "events": [
+    {
+      "event_id": "ev1",
+      "username": "teacher11",
+      "event_type": "class_created",
+      "created_at": "2026-03-10 09:00:00",
+      "meta": {
+        "class_id": "class_11i"
+      }
+    },
+    {
+      "event_id": "ev2",
+      "username": "teacher11",
+      "event_type": "class_assignment_created",
+      "created_at": "2026-03-10 10:00:00",
+      "meta": {
+        "class_id": "class_11i",
+        "material_id": "mat_cyber_basics"
+      }
+    },
+    {
+      "event_id": "ev3",
+      "username": "teacher11",
+      "event_type": "class_assignment_created",
+      "created_at": "2026-03-11 10:00:00",
+      "meta": {
+        "class_id": "class_11i",
+        "material_id": "mat_network_basics"
+      }
+    },
+    {
+      "event_id": "ev4",
+      "username": "ivan11",
+      "event_type": "login",
+      "created_at": "2026-03-12 10:22:00",
+      "meta": {}
+    },
+    {
+      "event_id": "ev5",
+      "username": "anna11",
+      "event_type": "login",
+      "created_at": "2026-03-12 10:18:00",
+      "meta": {}
+    },
+    {
+      "event_id": "2d92b44d0c254dc454e32dd7f478178c",
+      "username": "teacher11",
+      "event_type": "login",
+      "created_at": "2026-04-10 15:25:32",
+      "meta": {}
+    },
+    {
+      "event_id": "9f2e046081b8b4c6dacdce5ea28a22dd",
+      "username": "teacher11",
+      "event_type": "login",
+      "created_at": "2026-04-10 15:29:53",
+      "meta": {}
+    },
+    {
+      "event_id": "cfd478aad60fc6339dc4542ef10d950b",
+      "username": "teacher11",
+      "event_type": "class_assignment_created",
+      "created_at": "2026-04-10 15:35:44",
+      "meta": {
+        "class_id": "class_11i",
+        "material_id": "mat_network_basics"
+      }
+    },
+    {
+      "event_id": "5afbd2d15a4bbdf7c8be8187812a3098",
+      "username": "anna11",
+      "event_type": "login",
+      "created_at": "2026-04-10 15:36:05",
+      "meta": {}
+    },
+    {
+      "event_id": "02f053d9fb2f7bb54d39298caecae23e",
+      "username": "teacher11",
+      "event_type": "login",
+      "created_at": "2026-04-10 15:36:52",
+      "meta": {}
+    }
+  ]
+}

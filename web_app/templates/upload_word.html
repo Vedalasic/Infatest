@@ -1,0 +1,43 @@
+{% extends "base.html" %}
+{% block title %}Импорт из Word — Инфотест{% endblock %}
+{% block content %}
+<div class="row justify-content-center">
+  <div class="col-lg-6">
+    <div class="card">
+      <div class="card-body">
+        <h3 class="card-title mb-3">Импорт материала из файла Word</h3>
+
+        <form method="post" enctype="multipart/form-data">
+          <div class="mb-3">
+            <label for="file" class="form-label">Файл Word (.docx)</label>
+            <input class="form-control" type="file" id="file" name="file" accept=".docx" required>
+          </div>
+
+          <div class="mb-3">
+            <label for="title" class="form-label">Название (необязательно)</label>
+            <input type="text" class="form-control" id="title" name="title"
+                   placeholder="Если не заполнено — будет использовано имя файла">
+          </div>
+
+
+          <div class="alert alert-secondary small">
+            Из документа будут импортированы:
+            <ul class="mb-0">
+              <li>весь текст абзацев — как последовательность параграфов HTML;</li>
+              <li>все встроенные изображения — они сохранятся в <code>data/theory_materials</code>
+                  (в браузере по-прежнему открываются как <code>/static/theory_materials/…</code>)
+                  и прикрепятся к материалу.</li>
+            </ul>
+          </div>
+
+          <div class="d-flex gap-2">
+            <button type="submit" class="btn btn-primary">Импортировать</button>
+            <a class="btn btn-secondary" href="{{ url_for('teacher_profile') }}">Отмена</a>
+          </div>
+        </form>
+      </div>
+    </div>
+  </div>
+</div>
+{% endblock %}
+

@@ -1,0 +1,49 @@
+{% extends "base.html" %}
+{% block title %}Заявки в класс{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-center mb-3">
+  <h2 class="mb-0">Заявки в класс: {{ classroom.name }}</h2>
+  <a class="btn btn-outline-secondary" href="{{ url_for('class_view', class_id=classroom.class_id) }}">Назад</a>
+</div>
+
+<div class="table-responsive">
+  <table class="table table-striped">
+    <thead>
+      <tr><th>Ученик</th><th>Статус</th><th>Дата</th><th>Действия</th></tr>
+    </thead>
+    <tbody>
+      {% for r in requests %}
+        <tr>
+          <td>{{ r.student_username|user_display_name }} <span class="small text-muted">({{ r.student_username }})</span></td>
+          <td>
+            {% if r.status.value == 'pending' %}
+              Ожидает
+            {% elif r.status.value == 'approved' %}
+              Принята
+            {% elif r.status.value == 'rejected' %}
+              Отклонена
+            {% else %}
+              {{ r.status.value }}
+            {% endif %}
+          </td>
+          <td>{{ r.created_at }}</td>
+          <td>
+            {% if r.status.value == 'pending' %}
+              <form method="post" class="d-inline">
+                <input type="hidden" name="request_id" value="{{ r.request_id }}">
+                <button class="btn btn-sm btn-success" name="action" value="approve">Принять</button>
+                <button class="btn btn-sm btn-danger" name="action" value="reject">Отклонить</button>
+              </form>
+            {% else %}
+              <span class="text-muted">Решение принято</span>
+            {% endif %}
+          </td>
+        </tr>
+      {% else %}
+        <tr><td colspan="4" class="text-muted">Заявок нет.</td></tr>
+      {% endfor %}
+    </tbody>
+  </table>
+</div>
+{% endblock %}
+

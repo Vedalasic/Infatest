@@ -1,0 +1,154 @@
+{% extends "base.html" %}
+{% block title %}Статистика{% endblock %}
+{% block content %}
+<div class="d-flex justify-content-between align-items-start gap-3 mb-3">
+  <div>
+    <h2 class="mb-1">Статистика</h2>
+    <div class="text-muted small">Ваш прогресс и достижения</div>
+  </div>
+</div>
+
+<div class="row g-3 mb-3">
+  <div class="col-md-4">
+    <div class="card h-100">
+      <div class="card-body">
+        <div class="text-muted small">Попыток</div>
+        <div class="fs-3 fw-semibold">{{ stats.total_attempts }}</div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card h-100">
+      <div class="card-body">
+        <div class="text-muted small">Средний балл</div>
+        <div class="fs-3 fw-semibold">{{ "%.1f"|format(stats.average_score) }}%</div>
+      </div>
+    </div>
+  </div>
+  <div class="col-md-4">
+    <div class="card h-100">
+      <div class="card-body">
+        <div class="text-muted small">Лучший балл</div>
+        <div class="fs-3 fw-semibold">{{ "%.1f"|format(stats.best_score) }}%</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div class="card mb-3">
+  <div class="card-body">
+    <h5 class="card-title mb-3">Прогресс</h5>
+    <canvas id="progressChart" height="90"></canvas>
+    <div class="small text-muted mt-2">График строится по истории ваших результатов.</div>
+  </div>
+</div>
+
+<div class="card mb-3">
+  <div class="card-body">
+    <h5 class="card-title mb-3">Достижения</h5>
+    <p class="text-muted small mb-3">Все цели видны сразу. Незавершённые отображаются серым; после выполнения подсвечиваются цветом.</p>
+    <div class="row g-3">
+      {% for ac in achievement_details %}
+        <div class="col-md-4">
+          <div class="card h-100 achievement-item {% if ac.unlocked %}achievement-item--unlocked achievement-item--{{ ac.variant }}{% else %}achievement-item--locked{% endif %}">
+            <div class="card-body">
+              <div class="d-flex justify-content-between align-items-start gap-2 mb-2">
+                <div class="fw-semibold">{{ ac.title }}</div>
+                {% if ac.unlocked %}
+                  <span class="badge text-bg-success">Получено</span>
+                {% else %}
+                  <span class="badge text-bg-secondary">В процессе</span>
+                {% endif %}
+              </div>
+              <p class="small text-muted mb-2">{{ ac.description }}</p>
+              <div class="d-flex justify-content-between small mb-1">
+                <span>Прогресс</span>
+                <span class="fw-medium">{{ ac.current }} / {{ ac.target }}</span>
+              </div>
+              <div class="progress mb-2" style="height: 10px;">
+                <div class="progress-bar {% if ac.unlocked %}bg-{{ ac.variant }}{% else %}bg-secondary{% endif %}"
+                     role="progressbar"
+                     style="width: {{ "%.1f"|format(ac.progress_percent) }}%"
+                     aria-valuenow="{{ ac.progress_percent }}"
+                     aria-valuemin="0"
+                     aria-valuemax="100"></div>
+              </div>
+            </div>
+          </div>
+        </div>
+      {% endfor %}
+    </div>
+  </div>
+</div>
+
+<div class="card">
+  <div class="card-body">
+    <h5 class="card-title mb-3">Последние результаты</h5>
+    <div class="table-responsive">
+      <table class="table table-sm table-striped align-middle mb-0">
+        <thead>
+          <tr>
+            <th>Дата</th>
+            <th>Материал</th>
+            <th class="text-end">Баллы</th>
+          </tr>
+        </thead>
+        <tbody>
+          {% for r in stats.last5 %}
+            <tr>
+              <td class="text-nowrap">{{ r.date }}</td>
+              <td>{{ r.material_title }}</td>
+              <td class="text-end">{{ "%.1f"|format(r.percentage) }}%</td>
+            </tr>
+          {% else %}
+            <tr>
+              <td colspan="3" class="text-center text-muted">Результатов пока нет.</td>
+            </tr>
+          {% endfor %}
+        </tbody>
+      </table>
+    </div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4.4.1/dist/chart.umd.min.js"></script>
+<script>
+  async function loadProgress() {
+    const resp = await fetch("{{ url_for('api_user_progress') }}");
+    const data = await resp.json();
+    const labels = data.map(x => x.date);
+    const scores = data.map(x => x.score);
+
+    const ctx = document.getElementById('progressChart');
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: labels,
+        datasets: [{
+          label: 'Процент',
+          data: scores,
+          borderColor: '#0d6efd',
+          backgroundColor: 'rgba(13,110,253,0.15)',
+          tension: 0.25,
+          fill: true,
+          pointRadius: 3,
+        }]
+      },
+      options: {
+        responsive: true,
+        scales: {
+          y: {
+            min: 0,
+            max: 100,
+            ticks: { callback: (v) => v + '%' }
+          }
+        },
+        plugins: {
+          legend: { display: true }
+        }
+      }
+    });
+  }
+  loadProgress();
+</script>
+{% endblock %}
