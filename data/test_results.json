@@ -242,6 +242,810 @@
           "duration_sec": 1.96
         }
       ]
+    },
+    {
+      "result_id": "8e9c989c1327410f5b45a102aa0b2e4f",
+      "student_username": "anna11",
+      "material_title": "Основы кибербезопасности",
+      "test_id": "43ef463878670b13ccb468f3790e072a",
+      "date": "2026-04-10 17:34:11",
+      "correct_answers": 0,
+      "total_questions": 2,
+      "percentage": 0.0,
+      "mistakes": [
+        "Вопрос 1: Что такое фишинг?\nВаш ответ: ответ не дан\nПравильный ответ: Поддельное сообщение для кражи данных",
+        "Вопрос 2: Какой метод защиты требует пароль и дополнительный код?\nВаш ответ: двухфакторная аунтентификация\nПравильный ответ: 2FA, двухфакторная аутентификация\nОценка ИИ: Проверка через DeepSeek недоступна (нет ключа DEEPSEEK_API_KEY, ошибка сети или ответа API)."
+      ],
+      "details": [
+        {
+          "question_index": 0,
+          "question_text": "Что такое фишинг?",
+          "question_type": "single_choice",
+          "options": [
+            "Антивирус",
+            "Поддельное сообщение для кражи данных",
+            "Резервное копирование"
+          ],
+          "user_answer": "",
+          "correct_answers": [
+            "Поддельное сообщение для кражи данных"
+          ],
+          "is_correct": false,
+          "explanation": "Фишинг — это социальная инженерия с целью украсть данные.",
+          "ai_reason": "",
+          "duration_sec": 0.72
+        },
+        {
+          "question_index": 1,
+          "question_text": "Какой метод защиты требует пароль и дополнительный код?",
+          "question_type": "text_answer",
+          "options": [],
+          "user_answer": "двухфакторная аунтентификация",
+          "correct_answers": [
+            "2FA",
+            "двухфакторная аутентификация"
+          ],
+          "is_correct": false,
+          "explanation": "2FA использует минимум два фактора подтверждения личности.",
+          "ai_reason": "Проверка через DeepSeek недоступна (нет ключа DEEPSEEK_API_KEY, ошибка сети или ответа API).",
+          "duration_sec": 11.44
+        }
+      ],
+      "result_messages": [],
+      "assignment_id": "",
+      "total_duration_sec": 12.16,
+      "question_timings": [
+        {
+          "question_index": 0,
+          "duration_sec": 0.72
+        },
+        {
+          "question_index": 1,
+          "duration_sec": 11.44
+        }
+      ]
+    },
+    {
+      "result_id": "1d87aa1b23b3c495911fe2be58a03df1",
+      "student_username": "anna11",
+      "material_title": "Основы кибербезопасности",
+      "test_id": "43ef463878670b13ccb468f3790e072a",
+      "date": "2026-04-10 17:35:33",
+      "correct_answers": 0,
+      "total_questions": 2,
+      "percentage": 0.0,
+      "mistakes": [
+        "Вопрос 1: Что такое фишинг?\nВаш ответ: ответ не дан\nПравильный ответ: Поддельное сообщение для кражи данных",
+        "Вопрос 2: Какой метод защиты требует пароль и дополнительный код?\nВаш ответ: двухфакторная аунтентификация\nПравильный ответ: 2FA, двухфакторная аутентификация\nОценка ИИ: Проверка через DeepSeek недоступна (нет ключа DEEPSEEK_API_KEY, ошибка сети или ответа API)."
+      ],
+      "details": [
+        {
+          "question_index": 0,
+          "question_text": "Что такое фишинг?",
+          "question_type": "single_choice",
+          "options": [
+            "Антивирус",
+            "Поддельное сообщение для кражи данных",
+            "Резервное копирование"
+          ],
+          "user_answer": "",
+          "correct_answers": [
+            "Поддельное сообщение для кражи данных"
+          ],
+          "is_correct": false,
+          "explanation": "Фишинг — это социальная инженерия с целью украсть данные.",
+          "ai_reason": "",
+          "duration_sec": 0.43
+        },
+        {
+          "question_index": 1,
+          "question_text": "Какой метод защиты требует пароль и дополнительный код?",
+          "question_type": "text_answer",
+          "options": [],
+          "user_answer": "двухфакторная аунтентификация",
+          "correct_answers": [
+            "2FA",
+            "двухфакторная аутентификация"
+          ],
+          "is_correct": false,
+          "explanation": "2FA использует минимум два фактора подтверждения личности.",
+          "ai_reason": "Проверка через DeepSeek недоступна (нет ключа DEEPSEEK_API_KEY, ошибка сети или ответа API).",
+          "duration_sec": 8.93
+        }
+      ],
+      "result_messages": [],
+      "assignment_id": "",
+      "total_duration_sec": 9.36,
+      "question_timings": [
+        {
+          "question_index": 0,
+          "duration_sec": 0.43
+        },
+        {
+          "question_index": 1,
+          "duration_sec": 8.93
+        }
+      ]
+    },
+    {
+      "result_id": "a282ee6dbafb0357984eb92d6f2d8ad7",
+      "student_username": "anna11",
+      "material_title": "Основы кибербезопасности",
+      "test_id": "43ef463878670b13ccb468f3790e072a",
+      "date": "2026-04-10 17:36:55",
+      "correct_answers": 0,
+      "total_questions": 2,
+      "percentage": 0.0,
+      "mistakes": [
+        "Вопрос 1: Что такое фишинг?\nВаш ответ: ответ не дан\nПравильный ответ: Поддельное сообщение для кражи данных",
+        "Вопрос 2: Какой метод защиты требует пароль и дополнительный код?\nВаш ответ: двухфакторная аунтентификация\nПравильный ответ: 2FA, двухфакторная аутентификация\nОценка ИИ: Проверка через DeepSeek недоступна (нет ключа DEEPSEEK_API_KEY, ошибка сети или ответа API)."
+      ],
+      "details": [
+        {
+          "question_index": 0,
+          "question_text": "Что такое фишинг?",
+          "question_type": "single_choice",
+          "options": [
+            "Антивирус",
+            "Поддельное сообщение для кражи данных",
+            "Резервное копирование"
+          ],
+          "user_answer": "",
+          "correct_answers": [
+            "Поддельное сообщение для кражи данных"
+          ],
+          "is_correct": false,
+          "explanation": "Фишинг — это социальная инженерия с целью украсть данные.",
+          "ai_reason": "",
+          "duration_sec": 0.4
+        },
+        {
+          "question_index": 1,
+          "question_text": "Какой метод защиты требует пароль и дополнительный код?",
+          "question_type": "text_answer",
+          "options": [],
+          "user_answer": "двухфакторная аунтентификация",
+          "correct_answers": [
+            "2FA",
+            "двухфакторная аутентификация"
+          ],
+          "is_correct": false,
+          "explanation": "2FA использует минимум два фактора подтверждения личности.",
+          "ai_reason": "Проверка через DeepSeek недоступна (нет ключа DEEPSEEK_API_KEY, ошибка сети или ответа API).",
+          "duration_sec": 0.92
+        }
+      ],
+      "result_messages": [],
+      "assignment_id": "",
+      "total_duration_sec": 1.32,
+      "question_timings": [
+        {
+          "question_index": 0,
+          "duration_sec": 0.4
+        },
+        {
+          "question_index": 1,
+          "duration_sec": 0.92
+        }
+      ]
+    },
+    {
+      "result_id": "430e7f4cd71529438b316b6ef44f37e5",
+      "student_username": "anna11",
+      "material_title": "Основы кибербезопасности",
+      "test_id": "43ef463878670b13ccb468f3790e072a",
+      "date": "2026-04-10 17:40:35",
+      "correct_answers": 1,
+      "total_questions": 2,
+      "percentage": 50.0,
+      "mistakes": [
+        "Вопрос 1: Что такое фишинг?\nВаш ответ: ответ не дан\nПравильный ответ: Поддельное сообщение для кражи данных"
+      ],
+      "details": [
+        {
+          "question_index": 0,
+          "question_text": "Что такое фишинг?",
+          "question_type": "single_choice",
+          "options": [
+            "Антивирус",
+            "Поддельное сообщение для кражи данных",
+            "Резервное копирование"
+          ],
+          "user_answer": "",
+          "correct_answers": [
+            "Поддельное сообщение для кражи данных"
+          ],
+          "is_correct": false,
+          "explanation": "Фишинг — это социальная инженерия с целью украсть данные.",
+          "ai_reason": "",
+          "duration_sec": 0.49
+        },
+        {
+          "question_index": 1,
+          "question_text": "Какой метод защиты требует пароль и дополнительный код?",
+          "question_type": "text_answer",
+          "options": [],
+          "user_answer": "Двухфакторная аутентификация",
+          "correct_answers": [
+            "2FA",
+            "двухфакторная аутентификация"
+          ],
+          "is_correct": true,
+          "explanation": "2FA использует минимум два фактора подтверждения личности.",
+          "ai_reason": "Ответ содержит полную формулировку, соответствующую эталонному ответу. Содержит синоним.",
+          "duration_sec": 10.31
+        }
+      ],
+      "result_messages": [],
+      "assignment_id": "",
+      "total_duration_sec": 10.8,
+      "question_timings": [
+        {
+          "question_index": 0,
+          "duration_sec": 0.49
+        },
+        {
+          "question_index": 1,
+          "duration_sec": 10.31
+        }
+      ]
+    },
+    {
+      "result_id": "7dfec0510ebcd576b208dd0813e44ce9",
+      "student_username": "anna11",
+      "material_title": "Основы кибербезопасности",
+      "test_id": "43ef463878670b13ccb468f3790e072a",
+      "date": "2026-04-10 18:15:46",
+      "correct_answers": 0,
+      "total_questions": 2,
+      "percentage": 0.0,
+      "mistakes": [
+        "Вопрос 1: Что такое фишинг?\nВаш ответ: ответ не дан\nПравильный ответ: Поддельное сообщение для кражи данных",
+        "Вопрос 2: Какой метод защиты требует пароль и дополнительный код?\nВаш ответ: вап\nПравильный ответ: 2FA, двухфакторная аутентификация\nОценка ИИ: Проверка через DeepSeek недоступна (нет ключа DEEPSEEK_API_KEY, ошибка сети или ответа API)."
+      ],
+      "details": [
+        {
+          "question_index": 0,
+          "question_text": "Что такое фишинг?",
+          "question_type": "single_choice",
+          "options": [
+            "Антивирус",
+            "Поддельное сообщение для кражи данных",
+            "Резервное копирование"
+          ],
+          "user_answer": "",
+          "correct_answers": [
+            "Поддельное сообщение для кражи данных"
+          ],
+          "is_correct": false,
+          "explanation": "Фишинг — это социальная инженерия с целью украсть данные.",
+          "ai_reason": "",
+          "duration_sec": 0.61
+        },
+        {
+          "question_index": 1,
+          "question_text": "Какой метод защиты требует пароль и дополнительный код?",
+          "question_type": "text_answer",
+          "options": [],
+          "user_answer": "вап",
+          "correct_answers": [
+            "2FA",
+            "двухфакторная аутентификация"
+          ],
+          "is_correct": false,
+          "explanation": "2FA использует минимум два фактора подтверждения личности.",
+          "ai_reason": "Проверка через DeepSeek недоступна (нет ключа DEEPSEEK_API_KEY, ошибка сети или ответа API).",
+          "duration_sec": 2.18
+        }
+      ],
+      "result_messages": [],
+      "assignment_id": "",
+      "total_duration_sec": 2.79,
+      "question_timings": [
+        {
+          "question_index": 0,
+          "duration_sec": 0.61
+        },
+        {
+          "question_index": 1,
+          "duration_sec": 2.18
+        }
+      ]
+    },
+    {
+      "result_id": "b9a833e5f144fbc05a72122b58eadd6f",
+      "student_username": "anna11",
+      "material_title": "Основы кибербезопасности",
+      "test_id": "43ef463878670b13ccb468f3790e072a",
+      "date": "2026-04-10 18:24:51",
+      "correct_answers": 1,
+      "total_questions": 2,
+      "percentage": 50.0,
+      "mistakes": [
+        "Вопрос 1: Что такое фишинг?\nВаш ответ: ответ не дан\nПравильный ответ: Поддельное сообщение для кражи данных"
+      ],
+      "details": [
+        {
+          "question_index": 0,
+          "question_text": "Что такое фишинг?",
+          "question_type": "single_choice",
+          "options": [
+            "Антивирус",
+            "Поддельное сообщение для кражи данных",
+            "Резервное копирование"
+          ],
+          "user_answer": "",
+          "correct_answers": [
+            "Поддельное сообщение для кражи данных"
+          ],
+          "is_correct": false,
+          "explanation": "Фишинг — это социальная инженерия с целью украсть данные.",
+          "ai_reason": "",
+          "duration_sec": 0.69
+        },
+        {
+          "question_index": 1,
+          "question_text": "Какой метод защиты требует пароль и дополнительный код?",
+          "question_type": "text_answer",
+          "options": [],
+          "user_answer": "двухфакторная аутентификация",
+          "correct_answers": [
+            "2FA",
+            "двухфакторная аутентификация"
+          ],
+          "is_correct": true,
+          "explanation": "2FA использует минимум два фактора подтверждения личности.",
+          "ai_reason": "Ответ ученика полностью совпадает с эталонным, является синонимом и правильно передает суть вопроса.",
+          "duration_sec": 12.08
+        }
+      ],
+      "result_messages": [],
+      "assignment_id": "",
+      "total_duration_sec": 12.77,
+      "question_timings": [
+        {
+          "question_index": 0,
+          "duration_sec": 0.69
+        },
+        {
+          "question_index": 1,
+          "duration_sec": 12.08
+        }
+      ]
+    },
+    {
+      "result_id": "9e2834505b0e94fc3de4f7812c697066",
+      "student_username": "anna11",
+      "material_title": "Основы кибербезопасности",
+      "test_id": "43ef463878670b13ccb468f3790e072a",
+      "date": "2026-04-10 18:27:57",
+      "correct_answers": 0,
+      "total_questions": 2,
+      "percentage": 0.0,
+      "mistakes": [
+        "Вопрос 1: Что такое фишинг?\nВаш ответ: ответ не дан\nПравильный ответ: Поддельное сообщение для кражи данных",
+        "Вопрос 2: Какой метод защиты требует пароль и дополнительный код?\nВаш ответ: вапвап\nПравильный ответ: 2FA, двухфакторная аутентификация\nОценка ИИ: Ответ не засчитан: совпадение с эталоном не подтверждено дополнительной проверкой."
+      ],
+      "details": [
+        {
+          "question_index": 0,
+          "question_text": "Что такое фишинг?",
+          "question_type": "single_choice",
+          "options": [
+            "Антивирус",
+            "Поддельное сообщение для кражи данных",
+            "Резервное копирование"
+          ],
+          "user_answer": "",
+          "correct_answers": [
+            "Поддельное сообщение для кражи данных"
+          ],
+          "is_correct": false,
+          "explanation": "Фишинг — это социальная инженерия с целью украсть данные.",
+          "ai_reason": "",
+          "duration_sec": 0.33
+        },
+        {
+          "question_index": 1,
+          "question_text": "Какой метод защиты требует пароль и дополнительный код?",
+          "question_type": "text_answer",
+          "options": [],
+          "user_answer": "вапвап",
+          "correct_answers": [
+            "2FA",
+            "двухфакторная аутентификация"
+          ],
+          "is_correct": false,
+          "explanation": "2FA использует минимум два фактора подтверждения личности.",
+          "ai_reason": "Ответ не засчитан: совпадение с эталоном не подтверждено дополнительной проверкой.",
+          "duration_sec": 1.62
+        }
+      ],
+      "result_messages": [],
+      "assignment_id": "",
+      "total_duration_sec": 1.9500000000000002,
+      "question_timings": [
+        {
+          "question_index": 0,
+          "duration_sec": 0.33
+        },
+        {
+          "question_index": 1,
+          "duration_sec": 1.62
+        }
+      ]
+    },
+    {
+      "result_id": "d4ef3330c31f0f1db0580df9a73e304d",
+      "student_username": "anna11",
+      "material_title": "Основы кибербезопасности",
+      "test_id": "43ef463878670b13ccb468f3790e072a",
+      "date": "2026-04-10 18:37:16",
+      "correct_answers": 0,
+      "total_questions": 2,
+      "percentage": 0.0,
+      "mistakes": [
+        "Вопрос 1: Что такое фишинг?\nВаш ответ: ответ не дан\nПравильный ответ: Поддельное сообщение для кражи данных",
+        "Вопрос 2: Какой метод защиты требует пароль и дополнительный код?\nВаш ответ: ыва\nПравильный ответ: 2FA, двухфакторная аутентификация\nОценка ИИ: Проверка через DeepSeek недоступна (нет ключа DEEPSEEK_API_KEY, ошибка сети или ответа API)."
+      ],
+      "details": [
+        {
+          "question_index": 0,
+          "question_text": "Что такое фишинг?",
+          "question_type": "single_choice",
+          "options": [
+            "Антивирус",
+            "Поддельное сообщение для кражи данных",
+            "Резервное копирование"
+          ],
+          "user_answer": "",
+          "correct_answers": [
+            "Поддельное сообщение для кражи данных"
+          ],
+          "is_correct": false,
+          "explanation": "Фишинг — это социальная инженерия с целью украсть данные.",
+          "ai_reason": "",
+          "duration_sec": 0.9
+        },
+        {
+          "question_index": 1,
+          "question_text": "Какой метод защиты требует пароль и дополнительный код?",
+          "question_type": "text_answer",
+          "options": [],
+          "user_answer": "ыва",
+          "correct_answers": [
+            "2FA",
+            "двухфакторная аутентификация"
+          ],
+          "is_correct": false,
+          "explanation": "2FA использует минимум два фактора подтверждения личности.",
+          "ai_reason": "Проверка через DeepSeek недоступна (нет ключа DEEPSEEK_API_KEY, ошибка сети или ответа API).",
+          "duration_sec": 1.82
+        }
+      ],
+      "result_messages": [],
+      "assignment_id": "",
+      "total_duration_sec": 2.72,
+      "question_timings": [
+        {
+          "question_index": 0,
+          "duration_sec": 0.9
+        },
+        {
+          "question_index": 1,
+          "duration_sec": 1.82
+        }
+      ]
+    },
+    {
+      "result_id": "ee6dc39f46503ecb26c1c1fe33bf54f2",
+      "student_username": "anna11",
+      "material_title": "Основы кибербезопасности",
+      "test_id": "43ef463878670b13ccb468f3790e072a",
+      "date": "2026-04-10 18:57:51",
+      "correct_answers": 0,
+      "total_questions": 2,
+      "percentage": 0.0,
+      "mistakes": [
+        "Вопрос 1: Что такое фишинг?\nВаш ответ: ответ не дан\nПравильный ответ: Поддельное сообщение для кражи данных",
+        "Вопрос 2: Какой метод защиты требует пароль и дополнительный код?\nВаш ответ: ыва\nПравильный ответ: 2FA, двухфакторная аутентификация\nОценка ИИ: Проверка через DeepSeek недоступна (нет ключа DEEPSEEK_API_KEY, ошибка сети или ответа API)."
+      ],
+      "details": [
+        {
+          "question_index": 0,
+          "question_text": "Что такое фишинг?",
+          "question_type": "single_choice",
+          "options": [
+            "Антивирус",
+            "Поддельное сообщение для кражи данных",
+            "Резервное копирование"
+          ],
+          "user_answer": "",
+          "correct_answers": [
+            "Поддельное сообщение для кражи данных"
+          ],
+          "is_correct": false,
+          "explanation": "Фишинг — это социальная инженерия с целью украсть данные.",
+          "ai_reason": "",
+          "duration_sec": 0.6
+        },
+        {
+          "question_index": 1,
+          "question_text": "Какой метод защиты требует пароль и дополнительный код?",
+          "question_type": "text_answer",
+          "options": [],
+          "user_answer": "ыва",
+          "correct_answers": [
+            "2FA",
+            "двухфакторная аутентификация"
+          ],
+          "is_correct": false,
+          "explanation": "2FA использует минимум два фактора подтверждения личности.",
+          "ai_reason": "Проверка через DeepSeek недоступна (нет ключа DEEPSEEK_API_KEY, ошибка сети или ответа API).",
+          "duration_sec": 1.14
+        }
+      ],
+      "result_messages": [],
+      "assignment_id": "",
+      "total_duration_sec": 1.7399999999999998,
+      "question_timings": [
+        {
+          "question_index": 0,
+          "duration_sec": 0.6
+        },
+        {
+          "question_index": 1,
+          "duration_sec": 1.14
+        }
+      ]
+    },
+    {
+      "result_id": "81553da14233311b9fe77b34e1a0d7ec",
+      "student_username": "anna11",
+      "material_title": "Основы кибербезопасности",
+      "test_id": "43ef463878670b13ccb468f3790e072a",
+      "date": "2026-04-10 19:04:20",
+      "correct_answers": 0,
+      "total_questions": 2,
+      "percentage": 0.0,
+      "mistakes": [
+        "Вопрос 1: Что такое фишинг?\nВаш ответ: ответ не дан\nПравильный ответ: Поддельное сообщение для кражи данных",
+        "Вопрос 2: Какой метод защиты требует пароль и дополнительный код?\nВаш ответ: вапвап\nПравильный ответ: 2FA, двухфакторная аутентификация\nОценка ИИ: Проверка через DeepSeek недоступна (нет ключа DEEPSEEK_API_KEY, ошибка сети или ответа API)."
+      ],
+      "details": [
+        {
+          "question_index": 0,
+          "question_text": "Что такое фишинг?",
+          "question_type": "single_choice",
+          "options": [
+            "Антивирус",
+            "Поддельное сообщение для кражи данных",
+            "Резервное копирование"
+          ],
+          "user_answer": "",
+          "correct_answers": [
+            "Поддельное сообщение для кражи данных"
+          ],
+          "is_correct": false,
+          "explanation": "Фишинг — это социальная инженерия с целью украсть данные.",
+          "ai_reason": "",
+          "duration_sec": 0.85
+        },
+        {
+          "question_index": 1,
+          "question_text": "Какой метод защиты требует пароль и дополнительный код?",
+          "question_type": "text_answer",
+          "options": [],
+          "user_answer": "вапвап",
+          "correct_answers": [
+            "2FA",
+            "двухфакторная аутентификация"
+          ],
+          "is_correct": false,
+          "explanation": "2FA использует минимум два фактора подтверждения личности.",
+          "ai_reason": "Проверка через DeepSeek недоступна (нет ключа DEEPSEEK_API_KEY, ошибка сети или ответа API).",
+          "duration_sec": 0.77
+        }
+      ],
+      "result_messages": [],
+      "assignment_id": "",
+      "total_duration_sec": 1.62,
+      "question_timings": [
+        {
+          "question_index": 0,
+          "duration_sec": 0.85
+        },
+        {
+          "question_index": 1,
+          "duration_sec": 0.77
+        }
+      ]
+    },
+    {
+      "result_id": "caaa050b7d3fe6b2512148a06718b580",
+      "student_username": "anna11",
+      "material_title": "Основы кибербезопасности",
+      "test_id": "43ef463878670b13ccb468f3790e072a",
+      "date": "2026-04-10 19:20:58",
+      "correct_answers": 0,
+      "total_questions": 2,
+      "percentage": 0.0,
+      "mistakes": [
+        "Вопрос 1: Что такое фишинг?\nВаш ответ: ответ не дан\nПравильный ответ: Поддельное сообщение для кражи данных",
+        "Вопрос 2: Какой метод защиты требует пароль и дополнительный код?\nВаш ответ: олрдт\nПравильный ответ: 2FA, двухфакторная аутентификация\nОценка ИИ: Проверка через DeepSeek недоступна (нет ключа DEEPSEEK_API_KEY, ошибка сети или ответа API)."
+      ],
+      "details": [
+        {
+          "question_index": 0,
+          "question_text": "Что такое фишинг?",
+          "question_type": "single_choice",
+          "options": [
+            "Антивирус",
+            "Поддельное сообщение для кражи данных",
+            "Резервное копирование"
+          ],
+          "user_answer": "",
+          "correct_answers": [
+            "Поддельное сообщение для кражи данных"
+          ],
+          "is_correct": false,
+          "explanation": "Фишинг — это социальная инженерия с целью украсть данные.",
+          "ai_reason": "",
+          "duration_sec": 0.69
+        },
+        {
+          "question_index": 1,
+          "question_text": "Какой метод защиты требует пароль и дополнительный код?",
+          "question_type": "text_answer",
+          "options": [],
+          "user_answer": "олрдт",
+          "correct_answers": [
+            "2FA",
+            "двухфакторная аутентификация"
+          ],
+          "is_correct": false,
+          "explanation": "2FA использует минимум два фактора подтверждения личности.",
+          "ai_reason": "Проверка через DeepSeek недоступна (нет ключа DEEPSEEK_API_KEY, ошибка сети или ответа API).",
+          "duration_sec": 1.77
+        }
+      ],
+      "result_messages": [],
+      "assignment_id": "",
+      "total_duration_sec": 2.46,
+      "question_timings": [
+        {
+          "question_index": 0,
+          "duration_sec": 0.69
+        },
+        {
+          "question_index": 1,
+          "duration_sec": 1.77
+        }
+      ]
+    },
+    {
+      "result_id": "9ffe6292b14cff18de0c77c95252c92a",
+      "student_username": "anna11",
+      "material_title": "Основы кибербезопасности",
+      "test_id": "43ef463878670b13ccb468f3790e072a",
+      "date": "2026-04-10 19:26:26",
+      "correct_answers": 0,
+      "total_questions": 2,
+      "percentage": 0.0,
+      "mistakes": [
+        "Вопрос 1: Что такое фишинг?\nВаш ответ: ответ не дан\nПравильный ответ: Поддельное сообщение для кражи данных",
+        "Вопрос 2: Какой метод защиты требует пароль и дополнительный код?\nВаш ответ: олрдт\nПравильный ответ: 2FA, двухфакторная аутентификация\nОценка ИИ: Проверка через DeepSeek недоступна (нет ключа DEEPSEEK_API_KEY, ошибка сети или ответа API)."
+      ],
+      "details": [
+        {
+          "question_index": 0,
+          "question_text": "Что такое фишинг?",
+          "question_type": "single_choice",
+          "options": [
+            "Антивирус",
+            "Поддельное сообщение для кражи данных",
+            "Резервное копирование"
+          ],
+          "user_answer": "",
+          "correct_answers": [
+            "Поддельное сообщение для кражи данных"
+          ],
+          "is_correct": false,
+          "explanation": "Фишинг — это социальная инженерия с целью украсть данные.",
+          "ai_reason": "",
+          "duration_sec": 0.32
+        },
+        {
+          "question_index": 1,
+          "question_text": "Какой метод защиты требует пароль и дополнительный код?",
+          "question_type": "text_answer",
+          "options": [],
+          "user_answer": "олрдт",
+          "correct_answers": [
+            "2FA",
+            "двухфакторная аутентификация"
+          ],
+          "is_correct": false,
+          "explanation": "2FA использует минимум два фактора подтверждения личности.",
+          "ai_reason": "Проверка через DeepSeek недоступна (нет ключа DEEPSEEK_API_KEY, ошибка сети или ответа API).",
+          "duration_sec": 1.01
+        }
+      ],
+      "result_messages": [],
+      "assignment_id": "",
+      "total_duration_sec": 1.33,
+      "question_timings": [
+        {
+          "question_index": 0,
+          "duration_sec": 0.32
+        },
+        {
+          "question_index": 1,
+          "duration_sec": 1.01
+        }
+      ]
+    },
+    {
+      "result_id": "31ff138a75d4c2beb6f4bfa2b4530199",
+      "student_username": "anna11",
+      "material_title": "Основы кибербезопасности",
+      "test_id": "43ef463878670b13ccb468f3790e072a",
+      "date": "2026-04-10 19:26:55",
+      "correct_answers": 0,
+      "total_questions": 2,
+      "percentage": 0.0,
+      "mistakes": [
+        "Вопрос 1: Что такое фишинг?\nВаш ответ: ответ не дан\nПравильный ответ: Поддельное сообщение для кражи данных",
+        "Вопрос 2: Какой метод защиты требует пароль и дополнительный код?\nВаш ответ: олрдт\nПравильный ответ: 2FA, двухфакторная аутентификация\nОценка ИИ: ответ не соответствует 2FA или двухфакторной аутентификации"
+      ],
+      "details": [
+        {
+          "question_index": 0,
+          "question_text": "Что такое фишинг?",
+          "question_type": "single_choice",
+          "options": [
+            "Антивирус",
+            "Поддельное сообщение для кражи данных",
+            "Резервное копирование"
+          ],
+          "user_answer": "",
+          "correct_answers": [
+            "Поддельное сообщение для кражи данных"
+          ],
+          "is_correct": false,
+          "explanation": "Фишинг — это социальная инженерия с целью украсть данные.",
+          "ai_reason": "",
+          "duration_sec": 0.73
+        },
+        {
+          "question_index": 1,
+          "question_text": "Какой метод защиты требует пароль и дополнительный код?",
+          "question_type": "text_answer",
+          "options": [],
+          "user_answer": "олрдт",
+          "correct_answers": [
+            "2FA",
+            "двухфакторная аутентификация"
+          ],
+          "is_correct": false,
+          "explanation": "2FA использует минимум два фактора подтверждения личности.",
+          "ai_reason": "ответ не соответствует 2FA или двухфакторной аутентификации",
+          "duration_sec": 0.0
+        }
+      ],
+      "result_messages": [],
+      "assignment_id": "",
+      "total_duration_sec": 0.73,
+      "question_timings": [
+        {
+          "question_index": 0,
+          "duration_sec": 0.73
+        },
+        {
+          "question_index": 1,
+          "duration_sec": 0.0
+        }
+      ]
     }
   ]
 }
